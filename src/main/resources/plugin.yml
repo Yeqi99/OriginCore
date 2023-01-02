@@ -1,0 +1,9 @@
+name: OriginCore
+version: '${project.version}'
+main: cn.originmc.plugins.origincore.OriginCore
+api-version: 1.19
+authors: [ Yeqi ]
+softdepend:
+  - PlaceholderAPI
+  - NBTAPI
+  - ProtocolLib
