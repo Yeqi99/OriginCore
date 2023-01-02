@@ -15,11 +15,24 @@ public class Action {
     private ActionType type;
     private FormatText formatText;
     private JavaPlugin plugin;
+
+    /**
+     * 动作构造方法
+     * @param plugin 插件实例
+     * @param formatText 格式化文本容器
+     */
     public Action(JavaPlugin plugin, FormatText formatText){
         setPlugin(plugin);
         setType(ActionType.valueOf(formatText.getValue("type")));
         setFormatText(formatText);
     }
+
+    /**
+     * 给某玩家执行本动作
+     * 动作枚举详见ActionType
+     * @param player 玩家实例
+     * @return 执行结果
+     */
     public boolean execute(Player player){
         switch (type){
             case SELF:{

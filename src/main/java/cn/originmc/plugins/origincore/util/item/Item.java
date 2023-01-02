@@ -162,7 +162,7 @@ public class Item {
                 return new FormatText(nbtItem.getString(key));
             }
             default:{
-                return false;
+                return null;
             }
         }
     }
@@ -305,7 +305,7 @@ public class Item {
                 return new FormatText(space.getString(key));
             }
             default:{
-                return false;
+                return null;
             }
         }
     }
@@ -367,9 +367,29 @@ public class Item {
         }
         return new NBTItem(getItemStack()).hasTag(key);
     }
+    public boolean hasTag(String key,String spaceName){
+        if (isNull()){
+            return false;
+        }
+        if (isAir()){
+            return false;
+        }
+        if (!hasTag(spaceName)){
+            return false;
+        }
+        NBTItem nbtItem = new NBTItem(getItemStack());
+        NBTCompound space=nbtItem.getCompound(spaceName);
+        return space.hasTag(key);
+    }
     public void removeTag(String key){
-        NBTItem nbtItem = new NBTItem(itemStack);
+        NBTItem nbtItem = new NBTItem(getItemStack());
         nbtItem.removeKey(key);
+        setItemStack(nbtItem.getItem());
+    }
+    public void removeTag(String key,String spaceName){
+        NBTItem nbtItem = new NBTItem(getItemStack());
+        NBTCompound space=nbtItem.getCompound(spaceName);
+        space.removeKey(key);
         setItemStack(nbtItem.getItem());
     }
     public boolean isAir(){
