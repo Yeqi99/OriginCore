@@ -12,6 +12,7 @@ public final class OriginCore extends JavaPlugin {
     @Override
     public void onEnable() {
         instance=this;
+        saveDefaultConfig();
         HookManager.hookAll();
     }
 
