@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListUtil {
-    /*
+    /**
      * 格式化文本转化列表 例:  文本 ABC|BCD|DFE 列表长度为3 分别为ABC、BCD、DFE
+     * @param str 格式化文本
+     * @return 字符串列表
      */
     public static List<String> getListFromFormatStr(String str){
         List<String> returnStr=new ArrayList<>();

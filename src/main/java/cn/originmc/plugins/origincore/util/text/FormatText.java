@@ -8,10 +8,19 @@ import java.util.Map;
 public class FormatText {
     private Map<String,String> keyMap=new HashMap<>();
     private String originText;
+
+    /**
+     * 构造方法
+     * @param text 格式化文本
+     */
     public FormatText(String text){
         setOriginText(text);
         getData();
     }
+
+    /**
+     * 根据格式化文本获取信息
+     */
     public void getData(){
         keyMap.clear();
         StringBuilder key= new StringBuilder();
@@ -46,6 +55,12 @@ public class FormatText {
         }
         keyMap.put(key.toString(), value.toString());
     }
+
+    /**
+     * 判断是否有这条数据
+     * @param key 关键词
+     * @return 结果
+     */
     public boolean hasKey(String key){
         for (String s : getKeyList()) {
             if (s.equals(key)){
@@ -54,9 +69,20 @@ public class FormatText {
         }
         return false;
     }
+
+    /**
+     * 设置某个关键词的值 如果不存在则创建
+     * @param key 关键词
+     * @param value 值
+     */
     public void setKey(String key,String value){
         keyMap.put(key,value);
     }
+
+    /**
+     * 生成格式化文本
+     * @return 格式化字符串
+     */
     public String getFormatString(){
         String returnString="";
         for (String s : getKeyList()) {
@@ -64,6 +90,12 @@ public class FormatText {
         }
         return returnString.substring(0,returnString.length()-1);
     }
+
+    /**
+     * 获得数据值
+     * @param key 关键词
+     * @return 对应值
+     */
     public String getValue(String key){
         for(Map.Entry<String,String> entry:keyMap.entrySet()){
             if(entry.getKey().equalsIgnoreCase(key)){
@@ -72,6 +104,11 @@ public class FormatText {
         }
         return null;
     }
+
+    /**
+     * 获得关键词列表
+     * @return 关键词列表
+     */
     public List<String> getKeyList(){
         List<String> keyList=new ArrayList<>();
         for(Map.Entry<String,String> entry:keyMap.entrySet()){
@@ -91,6 +128,10 @@ public class FormatText {
         return originText;
     }
 
+    /**
+     * 设置格式化文本并获取数据
+     * @param originText 格式化文本
+     */
     public void setOriginText(String originText) {
         this.originText = originText;
         getData();

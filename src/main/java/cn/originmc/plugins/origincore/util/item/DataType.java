@@ -7,6 +7,12 @@ import org.bukkit.inventory.ItemStack;
 
 public enum DataType {
     INT,FLOAT,DOUBLE,STRING,BOOLEAN,ITEMSTACK,LONG,UUID,SHORT,ITEMSTACKARRAY,INTARRAY,BYTE,BYTEARRAY,FORMATTEXT,KNOWN;
+
+    /**
+     * 将对象转换为枚举
+     * @param object 数据对象
+     * @return 枚举
+     */
     public static DataType getType(Object object){
         if (object instanceof Integer){
             return INT;

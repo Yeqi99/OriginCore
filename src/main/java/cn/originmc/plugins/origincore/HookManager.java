@@ -4,6 +4,9 @@ import cn.originmc.plugins.origincore.hook.*;
 import net.bytebuddy.asm.Advice;
 
 public class HookManager {
+    /**
+     * 尝试与所有插件挂钩
+     */
     public static void hookAll(){
         ProtocolLibHook.hook(OriginCore.getInstance());
         PlaceholderAPIHook.hook(OriginCore.getInstance());

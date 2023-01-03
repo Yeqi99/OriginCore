@@ -14,6 +14,10 @@ public class YamlElement {
     private String id;
     private YamlConfiguration yml;
     private File file;
+
+    /**
+     * 将数据保存到文件
+     */
     public void save(){
         try {
             getYml().save(getFile());

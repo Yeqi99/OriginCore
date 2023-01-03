@@ -6,10 +6,24 @@ import java.util.List;
 import java.util.Random;
 
 public class Randomizer {
+    /**
+     * 获取区间内随机一个整型数值
+     * @param startInt 起始界
+     * @param endInt 结束界
+     * @return 随机整数
+     */
     public static int getRandom(int startInt,int endInt){
         Random r=new Random();
         return r.nextInt(endInt-startInt+1)+startInt;
     }
+
+    /**
+     * 获取指定长度的随机字符串
+     * @param len 字符串长度
+     * @param start ASCII起始界
+     * @param end ASCII结束界
+     * @return 随机字符串
+     */
     public static String getRandomCode(int len,int start,int end){
         String reStr="";
         for(int i=0;i<len;i++){
@@ -18,19 +32,36 @@ public class Randomizer {
         }
         return reStr;
     }
+
+    /**
+     * 获取双精度随机数
+     * @param startDouble 起始界
+     * @param endDouble 结束界
+     * @param sign 保留小数
+     * @return 随即双精度
+     */
     public static double getDoubleRandom(double startDouble,double endDouble,int sign){
         Random r=new Random();
         String s=String.format("%."+sign+"f",r.nextDouble (endDouble-startDouble)+startDouble);
         return Double.parseDouble(s);
     }
 
-    //从格式化列表中随机选取一个
+    /**
+     * 从格式化列表中随机选取一个结果
+     * @param str 格式化字符串
+     * @return 随机字符串
+     */
     public static String getRandomFromStr(String str){
         List<String> strList= ListUtil.getListFromFormatStr(str);
         return strList.get(getRandom(0, strList.size()-1));
     }
 
-    //从格式化区间中获取随机值  例 10-30  10.5-20.5
+    /**
+     * 从格式化区间中获取随机值  例 10-30  10.5-20.5
+     * @param str 格式化字符串
+     * @param sign 保留小数
+     * @return 随机字符串
+     */
     public static String getRandomFromSection(String str,int sign){
         String start="";
         String end="";
@@ -54,6 +85,13 @@ public class Randomizer {
             return String.valueOf(getDoubleRandom(Double.parseDouble( start),Double.parseDouble(end),sign));
         }
     }
+
+    /**
+     * 随机逻辑值
+     * @param chance 百分比概率
+     * @param sign 概率判定时小数判定长度
+     * @return 逻辑值
+     */
     public static boolean randomBoolean(double chance,int sign){
         if (chance>=100){
             return true;
