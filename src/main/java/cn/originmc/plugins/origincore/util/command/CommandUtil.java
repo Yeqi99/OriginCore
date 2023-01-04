@@ -1,9 +1,9 @@
 package cn.originmc.plugins.origincore.util.command;
 
-import cn.originmc.plugins.origincore.OriginCore;
 import cn.originmc.plugins.origincore.hook.LuckPermsHook;
 import cn.originmc.plugins.origincore.util.text.Sender;
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -11,12 +11,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CommandUtil {
-    private Sender sender;
+    private CommandSender sender;
     private Command command;
     private String label;
     private String[] args;
 
-    public CommandUtil(Sender sender, Command command, String label, String[] args){
+    public CommandUtil(CommandSender sender, Command command, String label, String[] args){
         setSender(sender);
         setCommand(command);
         setLabel(label);
@@ -69,13 +69,7 @@ public class CommandUtil {
     public Player getPlayer(){
         return (Player) sender;
     }
-    public Sender getSender() {
-        return sender;
-    }
 
-    public void setSender(Sender sender) {
-        this.sender = sender;
-    }
 
     public Command getCommand() {
         return command;
@@ -99,6 +93,13 @@ public class CommandUtil {
 
     public void setArgs(String[] args) {
         this.args = args;
+    }
+
+    public void setSender(CommandSender sender) {
+        this.sender = sender;
+    }
+    public CommandSender getSender(){
+        return sender;
     }
 
 }
