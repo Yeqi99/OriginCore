@@ -2,12 +2,10 @@ package cn.originmc.plugins.origincore.util.text.interactivekey.objcet;
 
 import cn.originmc.plugins.origincore.util.item.Item;
 import cn.originmc.plugins.origincore.util.text.Color;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.ItemTag;
 import net.md_5.bungee.api.chat.TextComponent;
-import net.md_5.bungee.api.chat.hover.content.Content;
 import net.md_5.bungee.api.chat.hover.content.Entity;
 import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.inventory.ItemStack;

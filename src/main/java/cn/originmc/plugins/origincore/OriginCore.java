@@ -1,5 +1,6 @@
 package cn.originmc.plugins.origincore;
 
+import cn.originmc.plugins.origincore.listener.cooldown.CoolDownListener;
 import cn.originmc.plugins.origincore.util.text.Sender;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -21,6 +22,10 @@ public final class OriginCore extends JavaPlugin {
         sender=new Sender(this);
         saveDefaultConfig();
         HookManager.hookAll();
+        if (getConfig().getBoolean("cool-down-listener.enable")){
+            CoolDownListener.setEnable(true);
+            CoolDownListener.listener();
+        }
         getSender().sendOnEnableMsgToLogger("OriginCore","Yeqi",VERSION,"Dependency");
     }
 

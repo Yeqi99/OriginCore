@@ -1,1 +1,3 @@
 hook-message: true
+cool-down-listener:
+  enable: true
