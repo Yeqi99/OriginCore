@@ -7,7 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class OriginCore extends JavaPlugin {
     private static JavaPlugin instance;
     private static Sender sender;
-    private static final String VERSION = "1.5";
+    private static final String VERSION = "1.6";
     public static JavaPlugin getInstance() {
         return instance;
     }
@@ -24,7 +24,7 @@ public final class OriginCore extends JavaPlugin {
         HookManager.hookAll();
         if (getConfig().getBoolean("cool-down-listener.enable")){
             CoolDownListener.setEnable(true);
-            CoolDownListener.listener();
+            CoolDownListener.listence();
         }
         getSender().sendOnEnableMsgToLogger("OriginCore","Yeqi",VERSION,"Dependency");
     }
