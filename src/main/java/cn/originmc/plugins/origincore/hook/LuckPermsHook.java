@@ -151,4 +151,9 @@ public class LuckPermsHook {
         }
         return returnList;
     }
+    public static void setPrimaryGroup(Player player,String group){
+        User user= getUser(player);
+        user.setPrimaryGroup(group);
+        getApi().getUserManager().saveUser(user);
+    }
 }
