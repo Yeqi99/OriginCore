@@ -78,6 +78,12 @@ public class CommandUtil {
     public void setCommand(Command command) {
         this.command = command;
     }
+    public boolean is(int index,String Parameter){
+        if (!hasParameter(index)){
+            return false;
+        }
+        return getParameter(index).equalsIgnoreCase(Parameter);
+    }
 
     public String getLabel() {
         return label;
