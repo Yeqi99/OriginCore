@@ -1,7 +1,7 @@
 package cn.originmc.plugins.origincore.util.command;
 
 import cn.originmc.plugins.origincore.hook.LuckPermsHook;
-import cn.originmc.plugins.origincore.util.text.Sender;
+import cn.originmc.plugins.origincore.hook.luckperms.LuckPermsManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -48,7 +48,7 @@ public class CommandUtil {
             return true;
         }
         if (LuckPermsHook.isLoad()){
-            return LuckPermsHook.hasPermission(getPlayer(),perm);
+            return LuckPermsManager.hasPermission(getPlayer(),perm);
         }else {
             return getPlayer().hasPermission(perm);
         }

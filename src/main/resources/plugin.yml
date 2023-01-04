@@ -7,3 +7,6 @@ softdepend:
   - PlaceholderAPI
   - NBTAPI
   - ProtocolLib
+  - PlayerPoints
+  - Vault
+  - LuckPerms
