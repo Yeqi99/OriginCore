@@ -1,7 +1,6 @@
 package cn.originmc.plugins.origincore.util.register;
 
 import org.bukkit.command.TabCompleter;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class CompleterRegister {
