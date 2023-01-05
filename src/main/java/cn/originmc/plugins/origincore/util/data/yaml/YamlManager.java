@@ -204,6 +204,19 @@ public class YamlManager {
     }
 
     /**
+     * 获得某个Key下所有下级key
+     * @param id 数据元素ID
+     * @param key 上级Key
+     * @param deep 是否包含所有子节点Key
+     * @return 指定Key下所有子节点Key
+     */
+    public List<String> getKeyList(String id,String key,boolean deep){
+        if (getYaml(id).getConfigurationSection(key)==null){
+            return null;
+        }
+        return new ArrayList<>(getYaml(id).getConfigurationSection(key).getKeys(deep));
+    }
+    /**
      * 修改内存中的数据元素 不会保存
      * @param id 数据元素ID
      * @param key 数据键
