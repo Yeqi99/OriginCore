@@ -39,6 +39,18 @@ public class CompleterUtil {
         }
         return "";
     }
+    public List<String> getPossibleList(List<String> allPossibleList){
+        List<String> returnList=new ArrayList<>();
+        for (String s : allPossibleList) {
+            if (s.toLowerCase().startsWith(args[getParameterAmount()-1].toLowerCase())){
+                returnList.add(s);
+            }
+        }
+        return returnList;
+    }
+    public String getNew(){
+        return args[getParameterAmount()-1];
+    }
     public List<String> getParameterList(){
         return new ArrayList<>(Arrays.asList(args));
     }
