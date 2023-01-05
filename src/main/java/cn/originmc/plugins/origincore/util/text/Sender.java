@@ -132,7 +132,7 @@ public class Sender {
         BukkitAudiences audience= BukkitAudiences.create(getPlugin());
         MiniMessage miniMessage=MiniMessage.miniMessage();
         Component message= MiniMessage.miniMessage().deserialize(
-                toColor(formatMessage)
+                formatMessage
         );
         audience.player(player).sendMessage(message);
     }
@@ -140,7 +140,7 @@ public class Sender {
         BukkitAudiences audience= BukkitAudiences.create(getPlugin());
         MiniMessage miniMessage=MiniMessage.miniMessage();
         Component message= MiniMessage.miniMessage().deserialize(
-                toColor(formatMessage)
+                formatMessage
         );
         audience.sender(sender).sendMessage(message);
     }
@@ -148,7 +148,7 @@ public class Sender {
         BukkitAudiences audience= BukkitAudiences.create(getPlugin());
         MiniMessage miniMessage=MiniMessage.miniMessage();
         Component message= MiniMessage.miniMessage().deserialize(
-                toColor(formatMessage)
+                formatMessage
         );
         audience.console().sendMessage(message);
     }
