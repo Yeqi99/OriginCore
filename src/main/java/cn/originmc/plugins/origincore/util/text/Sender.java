@@ -1,5 +1,7 @@
 package cn.originmc.plugins.origincore.util.text;
 
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -124,5 +126,24 @@ public class Sender {
         sendToLogger("    &b"+pluginName+"  &fv"+version+"-"+type+"  &7Successfully unloaded");
         sendToLogger("                   &7Made by "+author);
         sendToLogger("");
+    }
+    public void sendMiniMessageToPlayer(Player player,String formatMessage){
+        BukkitAudiences audience= BukkitAudiences.create(getPlugin());
+        audience.player(player).sendMessage(Component.text(formatMessage));
+    }
+    public void sendMiniMessageToPlayer(Player player,List<String> formatMessages){
+        for (String formatMessage : formatMessages) {
+            sendMiniMessageToPlayer(player,formatMessage);
+        }
+    }
+    public void sendGradientToPlayer(Player player,List<String> rgbColors,String message){
+        StringBuilder start= new StringBuilder("<gradient");
+        for (String rgbColor : rgbColors) {
+            start.append(":").append(rgbColor);
+        }
+        start.append(">");
+        String returnMessage=start+message+"</gradient>";
+        BukkitAudiences audience= BukkitAudiences.create(getPlugin());
+        audience.player(player).sendMessage(Component.text(returnMessage));
     }
 }

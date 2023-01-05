@@ -11,7 +11,6 @@ public class HookManager {
         PlaceholderAPIHook.hook(OriginCore.getInstance());
         VaultHook.hook(OriginCore.getInstance());
         PlayerPointsHook.hook(OriginCore.getInstance());
-        NBTAPIHook.hook(OriginCore.getInstance());
         LuckPermsHook.hook(OriginCore.getInstance());
     }
 }

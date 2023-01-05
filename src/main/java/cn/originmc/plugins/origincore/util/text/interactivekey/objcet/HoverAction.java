@@ -2,10 +2,9 @@ package cn.originmc.plugins.origincore.util.text.interactivekey.objcet;
 
 import cn.originmc.plugins.origincore.util.item.Item;
 import cn.originmc.plugins.origincore.util.text.Color;
-import net.md_5.bungee.api.chat.BaseComponent;
-import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.ItemTag;
-import net.md_5.bungee.api.chat.TextComponent;
+import me.clip.placeholderapi.libs.kyori.adventure.platform.bukkit.BukkitAudiences;
+import net.kyori.adventure.audience.Audience;
+import net.md_5.bungee.api.chat.*;
 import net.md_5.bungee.api.chat.hover.content.Entity;
 import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.inventory.ItemStack;
@@ -28,15 +27,8 @@ public class HoverAction {
                 return new HoverEvent(action, text);
             }
             case SHOW_ITEM:{
-                Item item=new Item((ItemStack) actionValue);
-                return new HoverEvent(action, new net.md_5.bungee.api.chat.hover.content.Item(UUID.randomUUID().toString(),item.getItemStack().getAmount()
-                ,ItemTag.ofNbt(item.getString())));
             }
             case SHOW_ENTITY:{
-                org.bukkit.entity.Entity e= (org.bukkit.entity.Entity) actionValue;
-                BaseComponent[] bc = TextComponent.fromLegacyText(Color.toColor(e.getCustomName()));
-                Entity entity=new Entity(e.getType().toString(),e.getUniqueId().toString(),bc[0]);
-                return new HoverEvent(action,entity);
             }
             default:{
                 return null;
