@@ -24,7 +24,7 @@ public class HoverAction {
     public HoverEvent getEvent(){
         switch (action){
             case SHOW_TEXT:{
-                Text text=new Text((String) actionValue);
+                Text text=new Text( Color.toColor((String) actionValue));
                 return new HoverEvent(action, text);
             }
             case SHOW_ITEM:{
@@ -35,7 +35,7 @@ public class HoverAction {
             case SHOW_ENTITY:{
                 org.bukkit.entity.Entity e= (org.bukkit.entity.Entity) actionValue;
                 BaseComponent[] bc = TextComponent.fromLegacyText(Color.toColor(e.getCustomName()));
-                Entity entity=new Entity(e.getType().toString(),UUID.randomUUID().toString(),bc[0]);
+                Entity entity=new Entity(e.getType().toString(),e.getUniqueId().toString(),bc[0]);
                 return new HoverEvent(action,entity);
             }
             default:{

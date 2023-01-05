@@ -331,8 +331,14 @@ public class Item {
     public void setUnbreakable(boolean flag){
         set("Unbreakable",flag);
     }
-    public boolean setCustomModelData(double value){
+    public boolean isUnbreakable(){
+        return (boolean) get("Unbreakable",DataType.BOOLEAN);
+    }
+    public boolean setCustomModelData(int value){
         return set("CustomModelData",value);
+    }
+    public int getCustomModelData(){
+        return (int) get("CustomModelData",DataType.INT);
     }
     public void setEnchantment(String id,int lvl,boolean flag){
         ItemMeta itemMeta= getItemStack().getItemMeta();
