@@ -2,6 +2,7 @@ package cn.originmc.plugins.origincore.util.text;
 
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -129,7 +130,37 @@ public class Sender {
     }
     public void sendMiniMessageToPlayer(Player player,String formatMessage){
         BukkitAudiences audience= BukkitAudiences.create(getPlugin());
-        audience.player(player).sendMessage(Component.text(formatMessage));
+        MiniMessage miniMessage=MiniMessage.miniMessage();
+        Component message= MiniMessage.miniMessage().deserialize(
+                toColor(formatMessage)
+        );
+        audience.player(player).sendMessage(message);
+    }
+    public void sendMiniMessageToSender(CommandSender sender,String formatMessage){
+        BukkitAudiences audience= BukkitAudiences.create(getPlugin());
+        MiniMessage miniMessage=MiniMessage.miniMessage();
+        Component message= MiniMessage.miniMessage().deserialize(
+                toColor(formatMessage)
+        );
+        audience.sender(sender).sendMessage(message);
+    }
+    public void sendMiniMessageToConsole(String formatMessage){
+        BukkitAudiences audience= BukkitAudiences.create(getPlugin());
+        MiniMessage miniMessage=MiniMessage.miniMessage();
+        Component message= MiniMessage.miniMessage().deserialize(
+                toColor(formatMessage)
+        );
+        audience.console().sendMessage(message);
+    }
+    public void sendMiniMessageToConsole(List<String> formatMessages){
+        for (String formatMessage : formatMessages) {
+            sendMiniMessageToConsole(formatMessage);
+        }
+    }
+    public void sendMiniMessageToSender(CommandSender sender,List<String> formatMessages){
+        for (String formatMessage : formatMessages) {
+            sendMiniMessageToSender(sender,formatMessage);
+        }
     }
     public void sendMiniMessageToPlayer(Player player,List<String> formatMessages){
         for (String formatMessage : formatMessages) {
