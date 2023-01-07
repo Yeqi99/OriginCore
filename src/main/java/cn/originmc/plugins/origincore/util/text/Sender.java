@@ -117,16 +117,16 @@ public class Sender {
         }
     }
     public void sendOnEnableMsgToLogger(String pluginName,String author,String version,String type){
-        sendToLogger("");
-        sendToLogger("    &b"+pluginName+"  &fv"+version+"-"+type+"  &7Successfully loaded");
-        sendToLogger("                   &7Made by "+author);
-        sendToLogger("");
+        sendMiniMessageToConsole("");
+        sendMiniMessageToConsole("    <gradient:#30fbfb:#6adafd><bold>"+pluginName+"  v"+version+"-"+type+"  Successfully loaded</gradient>");
+        sendMiniMessageToConsole("                   <gradient:#677042:#757853>Made by "+author+"</gradient>");
+        sendMiniMessageToConsole("");
     }
     public void sendOnDisableMsgToLogger(String pluginName,String author,String version,String type){
-        sendToLogger("");
-        sendToLogger("    &b"+pluginName+"  &fv"+version+"-"+type+"  &7Successfully unloaded");
-        sendToLogger("                   &7Made by "+author);
-        sendToLogger("");
+        sendMiniMessageToConsole("");
+        sendMiniMessageToConsole("    <gradient:#30fbfb:#6adafd><bold>"+pluginName+"  v"+version+"-"+type+"  Successfully unloaded</gradient>");
+        sendMiniMessageToConsole("                   <gradient:#677042:#757853>Made by "+author+"</gradient>");
+        sendMiniMessageToConsole("");
     }
     public void sendMiniMessageToPlayer(Player player,String formatMessage){
         BukkitAudiences audience= BukkitAudiences.create(getPlugin());

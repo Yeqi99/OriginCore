@@ -13,7 +13,7 @@ public class Container extends Item{
 
     /**
      * 初始化容器
-     * @param size 容器行数 (基于原版，每行9格)
+     * @param size 容器行数
      * @return 初始化结果
      */
     public boolean init(int size,String title){
@@ -60,7 +60,7 @@ public class Container extends Item{
         if (!hasTag("OriginCore_Container")){
             return null;
         }
-        if (!hasTag("OriginCore_Container",index+"")){
+        if (!hasTag(index+"","OriginCore_Container")){
             return new ItemStack(Material.AIR);
         }
         return (ItemStack) get(index+"",DataType.ITEMSTACK,"OriginCore_Container");
@@ -74,7 +74,7 @@ public class Container extends Item{
         if (!isInit()){
             return -1;
         }
-        return 9 * (int) get("size",DataType.INT,"OriginCore_Container");
+        return (int) get("size",DataType.INT,"OriginCore_Container");
     }
 
     /**

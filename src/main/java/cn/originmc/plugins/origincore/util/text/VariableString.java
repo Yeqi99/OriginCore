@@ -95,7 +95,7 @@ public class VariableString {
         if (getVariableAmount()<=index){
             return false;
         }
-        int nowAmount=0;
+        int nowIndex=0;
         StringBuilder clone=new StringBuilder();
         for (int i=0;i<getResultString().length();i++){
             char nowChar = getResultString().charAt(i);
@@ -117,11 +117,11 @@ public class VariableString {
                     nextSignIndex++;
                     funNameChar = getResultString().charAt(nextSignIndex);
                 }
-                if (nowAmount==index){
+                if (nowIndex==index){
                     clone.append(value);
                 }else {
                     clone.append("*").append(funName).append("*");
-                    nowAmount++;
+                    nowIndex++;
                 }
                 i = nextSignIndex;
             }
@@ -131,21 +131,22 @@ public class VariableString {
     }
     public int getVariableAmount(){
         int amount=0;
-        for (int i=0;i<getOriginString().length();i++){
-            char nowChar = getOriginString().charAt(i);
+        for (int i=0;i<getResultString().length();i++){
+            char nowChar = getResultString().charAt(i);
             if (nowChar!= getSign()){
                 continue;
             }
-            if (getOriginString().length() <= i + 1) {
+            if (getResultString().length() <= i + 1) {
                 continue;
             }
-            if (getOriginString().charAt(i + 1) == getSign()) {
+            if (getResultString().charAt(i + 1) == getSign()) {
                 i++;
             } else {
                 int nextSignIndex = i + 1;
-                char funNameChar = getOriginString().charAt(nextSignIndex);
+                char funNameChar = getResultString().charAt(nextSignIndex);
                 while (funNameChar != getSign()) {
                     nextSignIndex++;
+                    funNameChar = getResultString().charAt(nextSignIndex);
                 }
                 amount++;
                 i = nextSignIndex;

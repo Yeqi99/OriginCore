@@ -2,12 +2,13 @@ package cn.originmc.plugins.origincore;
 
 import cn.originmc.plugins.origincore.listener.cooldown.CoolDownListener;
 import cn.originmc.plugins.origincore.util.text.Sender;
+import de.tr7zw.nbtinjector.NBTInjector;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class OriginCore extends JavaPlugin {
     private static JavaPlugin instance;
     private static Sender sender;
-    private static final String VERSION = "2.6d";
+    private static final String VERSION = "2.7c";
     public static JavaPlugin getInstance() {
         return instance;
     }

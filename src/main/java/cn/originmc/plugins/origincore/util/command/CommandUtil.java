@@ -70,7 +70,6 @@ public class CommandUtil {
         return (Player) sender;
     }
 
-
     public Command getCommand() {
         return command;
     }
