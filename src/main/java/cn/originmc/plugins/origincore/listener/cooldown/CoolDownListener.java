@@ -9,7 +9,7 @@ import java.util.UUID;
 public class CoolDownListener {
     private static boolean enable;
     private static CoolDownQueue queue=new CoolDownQueue();
-    public static void listence(){
+    public static void listen(){
         new BukkitRunnable(){
             @Override
             public void run() {
