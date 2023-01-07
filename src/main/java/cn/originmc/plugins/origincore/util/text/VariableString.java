@@ -1,7 +1,9 @@
 package cn.originmc.plugins.origincore.util.text;
 
+import cn.originmc.plugins.origincore.OriginCore;
 import org.checkerframework.checker.index.qual.PolyUpperBound;
 
+import javax.print.DocFlavor;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class VariableString {
             if (getOriginString().length() <= i + 1) {
                 continue;
             }
-            if (getOriginString().charAt(i + 1) != getSign()) {
+            if (getOriginString().charAt(i + 1) == getSign()) {
                 i++;
             } else {
                 StringBuilder funName = new StringBuilder();
@@ -65,7 +67,7 @@ public class VariableString {
             if (getResultString().length() <= i + 1) {
                 continue;
             }
-            if (getResultString().charAt(i + 1) != getSign()) {
+            if (getResultString().charAt(i + 1) == getSign()) {
                 i++;
             } else {
                 StringBuilder funName = new StringBuilder();
@@ -78,11 +80,54 @@ public class VariableString {
                 }
                 if (funName.toString().equalsIgnoreCase(old)){
                     clone.append(value);
+                }else {
+                    clone.append("*").append(funName).append("*");
                 }
                 i = nextSignIndex;
             }
         }
         setResultString(clone.toString());
+    }
+    public boolean setVariable(int index,String value){
+        if (index<0){
+            return false;
+        }
+        if (getVariableAmount()<=index){
+            return false;
+        }
+        int nowAmount=0;
+        StringBuilder clone=new StringBuilder();
+        for (int i=0;i<getResultString().length();i++){
+            char nowChar = getResultString().charAt(i);
+            if (nowChar!= getSign()){
+                clone.append(nowChar);
+                continue;
+            }
+            if (getResultString().length() <= i + 1) {
+                continue;
+            }
+            if (getResultString().charAt(i + 1) == getSign()) {
+                i++;
+            } else {
+                StringBuilder funName = new StringBuilder();
+                int nextSignIndex = i + 1;
+                char funNameChar = getResultString().charAt(nextSignIndex);
+                while (funNameChar != getSign()) {
+                    funName.append(funNameChar);
+                    nextSignIndex++;
+                    funNameChar = getResultString().charAt(nextSignIndex);
+                }
+                if (nowAmount==index){
+                    clone.append(value);
+                }else {
+                    clone.append("*").append(funName).append("*");
+                    nowAmount++;
+                }
+                i = nextSignIndex;
+            }
+        }
+        setResultString(clone.toString());
+        return true;
     }
     public int getVariableAmount(){
         int amount=0;
@@ -94,7 +139,7 @@ public class VariableString {
             if (getOriginString().length() <= i + 1) {
                 continue;
             }
-            if (getOriginString().charAt(i + 1) != getSign()) {
+            if (getOriginString().charAt(i + 1) == getSign()) {
                 i++;
             } else {
                 int nextSignIndex = i + 1;
