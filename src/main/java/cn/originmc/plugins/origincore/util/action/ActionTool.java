@@ -14,7 +14,7 @@ public class ActionTool {
      * @param formatString 格式化字符串
      * @return Action动作
      */
-    public Action getAction(JavaPlugin plugin, String formatString){
+    public static Action getAction(JavaPlugin plugin, String formatString){
         FormatText formatText=new FormatText(formatString);
         return new Action(plugin,formatText);
     }
@@ -25,7 +25,7 @@ public class ActionTool {
      * @param formatStringList 格式化字符串列表
      * @return Action动作列表
      */
-    public List<Action> getActionList(JavaPlugin plugin,List<String> formatStringList){
+    public static List<Action> getActionList(JavaPlugin plugin,List<String> formatStringList){
         List<Action> actionList=new ArrayList<>();
         for (String s : formatStringList) {
             FormatText formatText=new FormatText(s);
@@ -40,7 +40,7 @@ public class ActionTool {
      * @param actionList 动作列表
      * @return 执行结果
      */
-    public boolean execute(Player player,List<Action> actionList){
+    public static boolean execute(Player player,List<Action> actionList){
         List<Boolean> results=new ArrayList<>();
         for (Action action : actionList) {
             //某个动作失败则直接中断队列
@@ -55,7 +55,7 @@ public class ActionTool {
      * @param actionList 动作列表
      * @return 预览结果
      */
-    public boolean viewExecute(Player player,List<Action> actionList){
+    public static boolean viewExecute(Player player,List<Action> actionList){
         for (Action action : actionList) {
             //某个动作失败则直接中断队列
             if (!action.viewExecute(player)){
@@ -71,7 +71,7 @@ public class ActionTool {
      * @param formatString 格式化字符串
      * @return 执行结果
      */
-    public boolean execute(JavaPlugin plugin,Player player,String formatString){
+    public static boolean execute(JavaPlugin plugin,Player player,String formatString){
         return getAction(plugin,formatString).execute(player);
     }
 
@@ -82,7 +82,7 @@ public class ActionTool {
      * @param formatStringList 格式化字符串列表
      * @return 执行结果
      */
-    public boolean execute(JavaPlugin plugin,Player player,List<String> formatStringList){
+    public static boolean execute(JavaPlugin plugin,Player player,List<String> formatStringList){
         for (String s : formatStringList) {
             //某个动作失败则直接中断队列
             if(!execute(plugin,player,s)){
