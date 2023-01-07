@@ -104,6 +104,12 @@ public class Action {
                 return false;
             }
             return beforeExecuteResult.get(preconditions);
+        }else if (formatText.hasKey("!preconditions")){
+            int preconditions= Integer.parseInt(formatText.getValue("!preconditions"));
+            if (preconditions>=beforeExecuteResult.size()){
+                return true;
+            }
+            return !beforeExecuteResult.get(preconditions);
         }
         return true;
     }
@@ -161,8 +167,7 @@ public class Action {
             }
             case POINTS:{
                 if (PlayerPointsHook.isLoad()){
-                    PlayerPointsHook.givePoints(player.getUniqueId(), Integer.parseInt(formatText.getValue("value")));
-                    return true;
+                    return PlayerPointsHook.givePoints(player.getUniqueId(), Integer.parseInt(formatText.getValue("value")));
                 }else {
                     return false;
                 }
