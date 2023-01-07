@@ -41,11 +41,10 @@ public class ActionTool {
      * @return 执行结果
      */
     public boolean execute(Player player,List<Action> actionList){
+        List<Boolean> results=new ArrayList<>();
         for (Action action : actionList) {
             //某个动作失败则直接中断队列
-            if (!action.execute(player)){
-                return false;
-            }
+            results.add(action.execute(player,results));
         }
         return true;
     }
