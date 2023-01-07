@@ -95,7 +95,28 @@ public class Action {
             }
         }
     }
-
+    public boolean viewExecute(Player player){
+        switch (type){
+            case SELF:
+            case TELLALL:
+            case TELL:
+            case CONSOLE: {
+                return true;
+            }
+            case DELAY:{
+                return TimeControl.delay(Long.parseLong(formatText.getValue("time")));
+            }
+            case MONEY:{
+                return VaultHook.isLoad();
+            }
+            case POINTS:{
+                return PlayerPointsHook.isLoad();
+            }
+            default:{
+                return false;
+            }
+        }
+    }
     public ActionType getType() {
         return type;
     }

@@ -51,6 +51,21 @@ public class ActionTool {
     }
 
     /**
+     * 预览执行
+     * @param player 玩家实例
+     * @param actionList 动作列表
+     * @return 预览结果
+     */
+    public boolean viewExecute(Player player,List<Action> actionList){
+        for (Action action : actionList) {
+            //某个动作失败则直接中断队列
+            if (!action.viewExecute(player)){
+                return false;
+            }
+        }
+        return true;
+    }
+    /**
      * 让玩家直接执行格式化字符串
      * @param plugin 插件实例
      * @param player 玩家实例
