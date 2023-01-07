@@ -8,34 +8,74 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.inventory.ItemStack;
 
 public class ParticleGenerator {
+    private Particle particle;
     private Location location;
     private int count;
     private double offsetX,offsetY,offsetZ,extra;
-    private Color color,toColor;
-    private float size;
+    private Color color,fromColor,toColor;
+    private float redStoneSize=1,dustSize=1;
     private ItemStack itemStack;
     private Vibration vibration;
     private BlockData blockData;
-    public boolean generator(Particle particle,Location location){
+    public ParticleGenerator(Location location,int count,double offsetX,double offsetY,double offsetZ,double extra){
+        setParticle(Particle.ASH);
+        setLocation(location);
+        setCount(count);
+        setOffsetX(offsetX);
+        setOffsetY(offsetY);
+        setOffsetZ(offsetZ);
+        setExtra(extra);
+    }
+    public ParticleGenerator(Particle particle,Location location,int count,double offsetX,double offsetY,double offsetZ,double extra){
+        setParticle(particle);
+        setLocation(location);
+        setCount(count);
+        setOffsetX(offsetX);
+        setOffsetY(offsetY);
+        setOffsetZ(offsetZ);
+        setExtra(extra);
+    }
+    public void setRedStoneData(int red,int green,int blue,int size){
+        setColor(Color.fromRGB(red,green,blue));
+        setRedStoneSize(size);
+    }
+    public void setDustColorTransition(int fromRed,int fromGreen,int fromBlue,int toRed,int toGreen,int toBlue,int size){
+        setFromColor(Color.fromRGB(fromRed,fromGreen,fromBlue));
+        setToColor(Color.fromRGB(toRed,toGreen,toBlue));
+        setDustSize(size);
+    }
+    public boolean generator(Particle particle){
         if (location.getWorld()==null){
             return false;
         }
         switch (particle){
             case REDSTONE:{
-                Particle.DustOptions dustOptions=new Particle.DustOptions(getColor(),getSize());
+                if (getColor()==null){
+                    return false;
+                }
+                Particle.DustOptions dustOptions=new Particle.DustOptions(getColor(),getRedStoneSize());
                 location.getWorld().spawnParticle(particle,location,getCount(),getOffsetX(),getOffsetY(),getOffsetZ(),getExtra(),dustOptions);
                 return true;
             }
             case DUST_COLOR_TRANSITION:{
-                Particle.DustTransition dustTransition=new Particle.DustTransition(getColor(),getToColor(),getSize());
+                if (getFromColor()==null || getToColor()==null){
+                    return false;
+                }
+                Particle.DustTransition dustTransition=new Particle.DustTransition(getFromColor(),getToColor(),getDustSize());
                 location.getWorld().spawnParticle(particle,location,getCount(),getOffsetX(),getOffsetY(),getOffsetZ(),getExtra(),dustTransition);
                 return true;
             }
             case ITEM_CRACK:{
+                if (getItemStack()==null){
+                    return false;
+                }
                 location.getWorld().spawnParticle(particle,location,getCount(),getOffsetX(),getOffsetY(),getOffsetZ(),getExtra(),getItemStack());
                 return true;
             }
             case VIBRATION:{
+                if (getVibration()==null){
+                    return false;
+                }
                 location.getWorld().spawnParticle(particle,location,getCount(),getOffsetX(),getOffsetY(),getOffsetZ(),getExtra(),getVibration());
                 return true;
             }
@@ -43,6 +83,60 @@ public class ParticleGenerator {
             case BLOCK_DUST:
             case BLOCK_MARKER:
             case FALLING_DUST:{
+                if (getBlockData()==null){
+                    return false;
+                }
+                location.getWorld().spawnParticle(particle,location,getCount(),getOffsetX(),getOffsetY(),getOffsetZ(),getExtra(),getBlockData());
+                return true;
+            }
+            default:{
+                location.getWorld().spawnParticle(particle,location,getCount(),getOffsetX(),getOffsetY(),getOffsetZ(),getExtra());
+                return true;
+            }
+        }
+    }
+    public boolean generator(){
+        if (location.getWorld()==null){
+            return false;
+        }
+        switch (particle){
+            case REDSTONE:{
+                if (getColor()==null){
+                    return false;
+                }
+                Particle.DustOptions dustOptions=new Particle.DustOptions(getColor(),getRedStoneSize());
+                location.getWorld().spawnParticle(particle,location,getCount(),getOffsetX(),getOffsetY(),getOffsetZ(),getExtra(),dustOptions);
+                return true;
+            }
+            case DUST_COLOR_TRANSITION:{
+                if (getFromColor()==null || getToColor()==null){
+                    return false;
+                }
+                Particle.DustTransition dustTransition=new Particle.DustTransition(getFromColor(),getToColor(),getDustSize());
+                location.getWorld().spawnParticle(particle,location,getCount(),getOffsetX(),getOffsetY(),getOffsetZ(),getExtra(),dustTransition);
+                return true;
+            }
+            case ITEM_CRACK:{
+                if (getItemStack()==null){
+                    return false;
+                }
+                location.getWorld().spawnParticle(particle,location,getCount(),getOffsetX(),getOffsetY(),getOffsetZ(),getExtra(),getItemStack());
+                return true;
+            }
+            case VIBRATION:{
+                if (getVibration()==null){
+                    return false;
+                }
+                location.getWorld().spawnParticle(particle,location,getCount(),getOffsetX(),getOffsetY(),getOffsetZ(),getExtra(),getVibration());
+                return true;
+            }
+            case BLOCK_CRACK:
+            case BLOCK_DUST:
+            case BLOCK_MARKER:
+            case FALLING_DUST:{
+                if (getBlockData()==null){
+                    return false;
+                }
                 location.getWorld().spawnParticle(particle,location,getCount(),getOffsetX(),getOffsetY(),getOffsetZ(),getExtra(),getBlockData());
                 return true;
             }
@@ -100,13 +194,6 @@ public class ParticleGenerator {
         this.extra = extra;
     }
 
-    public float getSize() {
-        return size;
-    }
-
-    public void setSize(float size) {
-        this.size = size;
-    }
 
     public ItemStack getItemStack() {
         return itemStack;
@@ -146,5 +233,37 @@ public class ParticleGenerator {
 
     public void setBlockData(BlockData blockData) {
         this.blockData = blockData;
+    }
+
+    public Color getFromColor() {
+        return fromColor;
+    }
+
+    public void setFromColor(Color fromColor) {
+        this.fromColor = fromColor;
+    }
+
+    public float getRedStoneSize() {
+        return redStoneSize;
+    }
+
+    public void setRedStoneSize(float redStoneSize) {
+        this.redStoneSize = redStoneSize;
+    }
+
+    public float getDustSize() {
+        return dustSize;
+    }
+
+    public void setDustSize(float dustSize) {
+        this.dustSize = dustSize;
+    }
+
+    public Particle getParticle() {
+        return particle;
+    }
+
+    public void setParticle(Particle particle) {
+        this.particle = particle;
     }
 }
