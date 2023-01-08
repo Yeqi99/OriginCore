@@ -11,6 +11,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -398,6 +399,16 @@ public class Item {
         space.removeKey(key);
         setItemStack(nbtItem.getItem());
     }
+    public List<String> getTags(){
+        NBTItem nbtItem = new NBTItem(getItemStack());
+        return new ArrayList<>(nbtItem.getKeys());
+    }
+    public List<String> getTags(String spaceName){
+        NBTItem nbtItem = new NBTItem(getItemStack());
+        NBTCompound space=nbtItem.getCompound(spaceName);
+        return new ArrayList<>(space.getKeys());
+    }
+
     public boolean isAir(){
         return getItemStack().getType().equals(Material.AIR);
     }
