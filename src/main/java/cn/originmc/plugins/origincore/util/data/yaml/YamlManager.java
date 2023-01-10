@@ -230,7 +230,10 @@ public class YamlManager {
         ye.setYml(ym);
         return setElement(ye);
     }
-
+    public boolean has(String id,String key){
+        Object object= getElement(id).getYml().get(key,null);
+        return object!=null;
+    }
     /**
      * 获取对应ID的数据元素中数据键存储对象
      * @param id 数据元素ID

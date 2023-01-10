@@ -2,7 +2,6 @@ package cn.originmc.plugins.origincore.util.inventory;
 
 import cn.originmc.plugins.origincore.util.item.DataType;
 import cn.originmc.plugins.origincore.util.item.Item;
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;

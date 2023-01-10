@@ -17,20 +17,46 @@ public class HelpMessage {
         }
         List<String> helpList=new ArrayList<>();
         for (CommandDescription description : descriptions) {
-            helpList.add(description.getCommand());
-            helpList.addAll(description.getDescription());
+            helpList.add("<bold><color:#FF5555>"+description.getCommand());
+            helpList.addAll(description.getFormat());
         }
         List<String> returnList=new ArrayList<>();
         returnList.add("<bold><gradient:#5e4fa2:#f79459:red>---------"+getTitle()+"---------</gradient>");
-        returnList.addAll(helpList.subList(pageIndex*getPageSize(),(pageIndex+1)*getPageSize()));
+        if ((pageIndex+1)*getPageSize()>helpList.size()){
+            returnList.addAll(helpList.subList(pageIndex*getPageSize(),helpList.size()));
+        }else {
+            returnList.addAll(helpList.subList(pageIndex*getPageSize(),(pageIndex+1)*getPageSize()));
+        }
+        int toIndex=(pageIndex+1)*getPageSize();
+
         returnList.add("<bold><gradient:#5e4fa2:#f79459:red>---------"+getTitle()+"---------</gradient>");
-        returnList.add("<bold><gradient:#5e4fa2:#f79459:red>(page."+(pageIndex+1)+")</gradient>");
+        return returnList;
+    }
+    public List<String> getPageByInteractKey(int pageIndex){
+        if (getPageAmount()<=pageIndex){
+            return null;
+        }
+        List<String> helpList=new ArrayList<>();
+        for (CommandDescription description : descriptions) {
+            helpList.add("<bold><color:#FF5555>"+description.getCommand());
+            helpList.addAll(description.getFormat());
+        }
+        List<String> returnList=new ArrayList<>();
+        returnList.add("<bold><gradient:#5e4fa2:#f79459:red>---------"+getTitle()+"---------</gradient>");
+        if ((pageIndex+1)*getPageSize()>helpList.size()){
+            returnList.addAll(helpList.subList(pageIndex*getPageSize(),helpList.size()));
+        }else {
+            returnList.addAll(helpList.subList(pageIndex*getPageSize(),(pageIndex+1)*getPageSize()));
+        }
+        int toIndex=(pageIndex+1)*getPageSize();
+
+        returnList.add("<bold><gradient:#5e4fa2:#f79459:red>---------"+getTitle()+"---------</gradient>");
         return returnList;
     }
     public int getPageAmount(){
         int amount=0;
         for (CommandDescription description : descriptions) {
-            amount+=description.getDescription().size();
+            amount+=description.getDescription().size()+1;
         }
         return amount/getPageSize()+1;
     }
@@ -40,6 +66,7 @@ public class HelpMessage {
             CommandDescription commandDescription=new CommandDescription();
             commandDescription.setCommand(command);
             commandDescription.getDescription().add(description);
+            descriptions.add(commandDescription);
             return;
         }
         for (CommandDescription commandDescription : descriptions) {
