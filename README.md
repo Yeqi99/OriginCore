@@ -1,5 +1,6 @@
 # OriginCore
 核心库
+###Maven
 ```
 <repository>
     <id>origin-craft</id>
