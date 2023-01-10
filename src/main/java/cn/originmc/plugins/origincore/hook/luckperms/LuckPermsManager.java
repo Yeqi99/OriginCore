@@ -82,10 +82,23 @@ public class LuckPermsManager {
         group.data().add(node);
         getApi().getGroupManager().saveGroup(group);
     }
-
+    public static  void setMeta(String groupName,String key,String value,long time){
+        Group group=getGroup(groupName);
+        MetaNode node = MetaNode.builder(key, value).expiry(time).build();
+        group.data().clear(NodeType.META.predicate(mn -> mn.getMetaKey().equals(key)));
+        group.data().add(node);
+        getApi().getGroupManager().saveGroup(group);
+    }
     public static void setMeta(Player player,String key,String value){
         User user=getUser(player);
         MetaNode node=MetaNode.builder(key,value).build();
+        user.data().clear(NodeType.META.predicate(mn -> mn.getMetaKey().equals(key)));
+        user.data().add(node);
+        getApi().getUserManager().saveUser(user);
+    }
+    public static void setMeta(Player player,String key,String value,long time){
+        User user=getUser(player);
+        MetaNode node=MetaNode.builder(key,value).expiry(time).build();
         user.data().clear(NodeType.META.predicate(mn -> mn.getMetaKey().equals(key)));
         user.data().add(node);
         getApi().getUserManager().saveUser(user);

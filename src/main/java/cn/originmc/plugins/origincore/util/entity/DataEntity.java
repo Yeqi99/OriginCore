@@ -1,7 +1,6 @@
 package cn.originmc.plugins.origincore.util.entity;
 
 import cn.originmc.plugins.origincore.util.text.FormatText;
-import de.tr7zw.nbtapi.NBTBlock;
 import de.tr7zw.nbtapi.NBTCompound;
 import de.tr7zw.nbtapi.NBTEntity;
 import org.bukkit.entity.Entity;
@@ -147,7 +146,7 @@ public class DataEntity {
             }
         }
     }
-    public Object get(String key, cn.originmc.plugins.origincore.util.item.DataType dataType){
+    public Object get(String key, cn.originmc.plugins.origincore.util.entity.DataType dataType){
         NBTEntity nbtEntity=new NBTEntity(getEntity());
         switch (dataType){
             case INT:{
@@ -197,7 +196,7 @@ public class DataEntity {
             }
         }
     }
-    public Object get(String key, cn.originmc.plugins.origincore.util.item.DataType dataType,String spaceName){
+    public Object get(String key, cn.originmc.plugins.origincore.util.entity.DataType dataType,String spaceName){
         NBTEntity nbtEntity=new NBTEntity(getEntity());
         NBTCompound space=nbtEntity.getCompound(spaceName);
         switch (dataType){
