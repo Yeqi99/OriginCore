@@ -1,6 +1,7 @@
 # OriginCore
 核心库
 ### Maven
+#### 请使用Maven 3.6.3
 ```
 <repository>
     <id>origin-craft</id>
