@@ -20,39 +20,48 @@ public class YamlManager {
      * @param plugin 插件实例
      * @param dirName 文件夹名
      */
-    public YamlManager(JavaPlugin plugin,String dirName){
+    public YamlManager(JavaPlugin plugin,String dirName,boolean deep){
         setPlugin(plugin);
         setPath(getPlugin().getDataFolder());
         setDirName(dirName);
-        getData();
+        getData(deep);
     }
-
+    public YamlManager(JavaPlugin plugin,boolean deep){
+        setPlugin(plugin);
+        setPath(getPlugin().getDataFolder());
+        getData(deep);
+    }
     /**
      * 构造方法
      * @param plugin 插件实例
      * @param path 路径
      * @param dirName 文件夹名
      */
-    public YamlManager(JavaPlugin plugin,String path,String dirName){
+    public YamlManager(JavaPlugin plugin,String path,String dirName,boolean deep){
         File file=new File(path);
         setPath(file);
         setPlugin(plugin);
         setDirName(dirName);
-        getData();
+        getData(deep);
     }
 
     /**
      * 获取路径下所有文件数据
      * 以YamlElement形式存储为列表
      */
-    public void getData(){
+    public void getData(boolean deep){
         yamlElements.clear();
-        File dir = new File(path, dirName);
+        File dir;
+        if (getDirName()==null){
+            dir = new File(path.getPath());
+        }else {
+            dir = new File(path, dirName);
+        }
         if (!dir.exists()) {
             dir.mkdirs();
             return;
         }
-        getAllElement(dir, yamlElements);
+        getAllElement(dir, yamlElements,deep);
     }
 
     /**
@@ -66,6 +75,22 @@ public class YamlManager {
         for (File file : fileList) {
             if (file.isDirectory()) {
                 getAllElement(file, elements);
+            } else {
+                //收集配置文件数据
+                YamlConfiguration yml = YamlConfiguration.loadConfiguration(file);
+                YamlElement ye=new YamlElement(file.getName().replace(".yml",""),file,yml);
+                elements.add(ye);
+            }
+        }
+    }
+    public void getAllElement(File fileInput, List<YamlElement> elements,boolean deep) {
+        File[] fileList = fileInput.listFiles();
+        assert fileList != null;
+        for (File file : fileList) {
+            if (file.isDirectory()) {
+                if (deep){
+                    getAllElement(file, elements);
+                }
             } else {
                 //收集配置文件数据
                 YamlConfiguration yml = YamlConfiguration.loadConfiguration(file);

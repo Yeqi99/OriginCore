@@ -92,7 +92,7 @@ public class LuckPermsManager {
     public static void setMeta(Player player,String key,String value){
         User user=getUser(player);
         MetaNode node=MetaNode.builder(key,value).build();
-        user.data().clear(NodeType.META.predicate(mn -> mn.getMetaKey().equals(key)));
+        user.data().clear(NodeType.META.predicate(mn -> mn.getMetaKey().equalsIgnoreCase(key)));
         user.data().add(node);
         getApi().getUserManager().saveUser(user);
     }
