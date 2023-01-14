@@ -10,7 +10,7 @@
 <dependency>
     <groupId>cn.originmc.plugins</groupId>
     <artifactId>origin-core</artifactId>
-    <version>2.8</version>
-<scope>provided</scope>
+    <version>2.8e</version>
+    <scope>provided</scope>
 </dependency>
 ```
