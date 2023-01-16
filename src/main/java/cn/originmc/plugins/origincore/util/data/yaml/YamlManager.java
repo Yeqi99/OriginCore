@@ -26,10 +26,21 @@ public class YamlManager {
         setDirName(dirName);
         getData(deep);
     }
+    public YamlManager(JavaPlugin plugin,String dirName){
+        setPlugin(plugin);
+        setPath(getPlugin().getDataFolder());
+        setDirName(dirName);
+        getData(false);
+    }
     public YamlManager(JavaPlugin plugin,boolean deep){
         setPlugin(plugin);
         setPath(getPlugin().getDataFolder());
         getData(deep);
+    }
+    public YamlManager(JavaPlugin plugin){
+        setPlugin(plugin);
+        setPath(getPlugin().getDataFolder());
+        getData(false);
     }
     /**
      * 构造方法
@@ -43,6 +54,13 @@ public class YamlManager {
         setPlugin(plugin);
         setDirName(dirName);
         getData(deep);
+    }
+    public YamlManager(JavaPlugin plugin,String path,String dirName){
+        File file=new File(path);
+        setPath(file);
+        setPlugin(plugin);
+        setDirName(dirName);
+        getData(false);
     }
 
     /**

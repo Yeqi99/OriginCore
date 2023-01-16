@@ -7,6 +7,9 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class InteractiveKey {
     private String display;
     private ClickAction clickAction;
@@ -57,5 +60,13 @@ public class InteractiveKey {
 
     public void setHoverAction(HoverAction hoverAction) {
         this.hoverAction = hoverAction;
+    }
+
+    public static BaseComponent[] getFromList(List<InteractiveKey> interactiveKeyList){
+        List<BaseComponent[]> baseComponents=new ArrayList<>();
+        for (InteractiveKey interactiveKey : interactiveKeyList) {
+            baseComponents.add(interactiveKey.get());
+        }
+        return TextProcessing.MergeList(baseComponents);
     }
 }
