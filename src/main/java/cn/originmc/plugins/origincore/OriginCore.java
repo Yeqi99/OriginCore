@@ -7,7 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class OriginCore extends JavaPlugin {
     private static JavaPlugin instance;
     private static Sender sender;
-    private static final String VERSION = "2.9b";
+    private static final String VERSION = "2.12";
     public static JavaPlugin getInstance() {
         return instance;
     }

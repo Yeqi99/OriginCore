@@ -48,7 +48,14 @@ public class ActionTool {
         }
         return true;
     }
-
+    public static boolean execute(Player player,List<Action> actionList,List<Object> objects){
+        List<Boolean> results=new ArrayList<>();
+        for (Action action : actionList) {
+            //某个动作失败则直接中断队列
+            results.add(action.execute(player,results,objects));
+        }
+        return true;
+    }
     /**
      * 预览执行
      * @param player 玩家实例
