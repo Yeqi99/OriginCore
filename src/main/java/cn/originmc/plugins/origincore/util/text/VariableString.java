@@ -1,9 +1,5 @@
 package cn.originmc.plugins.origincore.util.text;
 
-import cn.originmc.plugins.origincore.OriginCore;
-import org.checkerframework.checker.index.qual.PolyUpperBound;
-
-import javax.print.DocFlavor;
 import java.util.ArrayList;
 import java.util.List;
 

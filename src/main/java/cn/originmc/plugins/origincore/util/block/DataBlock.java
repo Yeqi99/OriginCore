@@ -3,10 +3,13 @@ package cn.originmc.plugins.origincore.util.block;
 import cn.originmc.plugins.origincore.util.text.FormatText;
 import de.tr7zw.nbtapi.NBTBlock;
 import de.tr7zw.nbtapi.NBTCompound;
+import de.tr7zw.nbtapi.NBTItem;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class DataBlock {
@@ -282,5 +285,14 @@ public class DataBlock {
         NBTBlock nbtBlock = new NBTBlock(getBlock());
         NBTCompound space=nbtBlock.getData().getCompound(spaceName);
         space.removeKey(key);
+    }
+    public List<String> getTags(){
+        NBTBlock nbtBlock = new NBTBlock(getBlock());
+        return new ArrayList<>(nbtBlock.getData().getKeys());
+    }
+    public List<String> getTags(String spaceName){
+        NBTBlock nbtBlock = new NBTBlock(getBlock());
+        NBTCompound space=nbtBlock.getData().getCompound(spaceName);
+        return new ArrayList<>(space.getKeys());
     }
 }

@@ -1,5 +1,6 @@
 package cn.originmc.plugins.origincore.listener.cooldown.object;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -29,7 +30,7 @@ public class CoolDownQueue {
     }
     public boolean hasCoolDown(UUID id){
         for (CoolDown coolDown : coolDownList) {
-            if (coolDown.getId()==id){
+            if (coolDown.getId().toString().equalsIgnoreCase(id.toString())){
                 return true;
             }
         }

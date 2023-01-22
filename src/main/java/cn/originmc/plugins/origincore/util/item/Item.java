@@ -310,6 +310,57 @@ public class Item {
             }
         }
     }
+    public void addDouble(String key,double addValue){
+        if (hasTag(key)){
+            set(key,(double)get(key,DataType.DOUBLE)+addValue);
+        }else {
+            set(key,addValue);
+        }
+    }
+    public void addDouble(String key,double addValue,String spaceName){
+        if (!hasTag(spaceName)){
+            addSpace(spaceName);
+        }
+        if (hasTag(key,spaceName)){
+            set(key,(double)get(key,DataType.DOUBLE,spaceName)+addValue,spaceName);
+        }else {
+            set(key,addValue,spaceName);
+        }
+    }
+    public void addInt(String key,int addValue){
+        if (hasTag(key)){
+            set(key,(int)get(key,DataType.INT)+addValue);
+        }else {
+            set(key,addValue);
+        }
+    }
+    public void addInt(String key,int addValue,String spaceName){
+        if (!hasTag(spaceName)){
+            addSpace(spaceName);
+        }
+        if (hasTag(key)){
+            set(key,(int)get(key,DataType.INT,spaceName)+addValue,spaceName);
+        }else {
+            set(key,addValue,spaceName);
+        }
+    }
+    public void addFloat(String key,float addValue){
+        if (hasTag(key)){
+            set(key,(float)get(key,DataType.FLOAT)+addValue);
+        }else {
+            set(key,addValue);
+        }
+    }
+    public void addFloat(String key,float addValue,String spaceName){
+        if (!hasTag(spaceName)){
+            addSpace(spaceName);
+        }
+        if (hasTag(key)){
+            set(key,(float)get(key,DataType.FLOAT,spaceName)+addValue,spaceName);
+        }else {
+            set(key,addValue,spaceName);
+        }
+    }
     public void addSpace(String spaceName){
         NBTItem nbtItem = new NBTItem(getItemStack());
         nbtItem.addCompound( spaceName);
@@ -416,11 +467,19 @@ public class Item {
         return getItemStack() == null;
     }
     public boolean hasLore(){
-        if (getItemStack().getItemMeta()!=null){
-            return getItemStack().getItemMeta().hasLore();
+        if (getItemStack().hasItemMeta()){
+            return Objects.requireNonNull(getItemStack().getItemMeta()).hasLore();
         }else {
             return false;
         }
+    }
+    public boolean hasDisplay(){
+        if (getItemStack().hasItemMeta()){
+            if (Objects.requireNonNull(getItemStack().getItemMeta()).hasDisplayName()){
+                return true;
+            }
+        }
+        return false;
     }
     public void initMeta(){
         if(!getItemStack().hasItemMeta()){

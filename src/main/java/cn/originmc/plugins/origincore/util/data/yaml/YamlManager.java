@@ -254,10 +254,12 @@ public class YamlManager {
      * @return 指定Key下所有子节点Key
      */
     public List<String> getKeyList(String id,String key,boolean deep){
-        if (getYaml(id).getConfigurationSection(key)==null){
+        YamlElement ye=getElement(id);
+        YamlConfiguration ym=ye.getYml();
+        if (ym.getConfigurationSection(key)==null){
             return null;
         }
-        return new ArrayList<>(getYaml(id).getConfigurationSection(key).getKeys(deep));
+        return new ArrayList<>(ym.getConfigurationSection(key).getKeys(deep));
     }
     /**
      * 修改内存中的数据元素 不会保存
@@ -285,6 +287,9 @@ public class YamlManager {
      */
     public Object get(String id,String key){
         return getElement(id).getYml().get(key,null);
+    }
+    public Object get(String id,String key,Object defaultObject){
+        return getElement(id).getYml().get(key,defaultObject);
     }
 
     /**

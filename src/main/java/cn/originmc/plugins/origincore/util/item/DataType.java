@@ -4,6 +4,8 @@ package cn.originmc.plugins.origincore.util.item;
 import cn.originmc.plugins.origincore.util.text.FormatText;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.UUID;
+
 
 public enum DataType {
     INT,FLOAT,DOUBLE,STRING,BOOLEAN,ITEMSTACK,LONG,UUID,SHORT,ITEMSTACKARRAY,INTARRAY,BYTE,BYTEARRAY,FORMATTEXT,KNOWN;
@@ -44,6 +46,46 @@ public enum DataType {
             return FORMATTEXT;
         }else {
             return KNOWN;
+        }
+    }
+    public static Object stringToObject(String s,DataType dataType){
+        switch (dataType){
+            case INT:{
+                return Integer.parseInt(s);
+            }
+            case BYTE:{
+                return Byte.parseByte(s);
+            }
+            case LONG:{
+                return Long.parseLong(s);
+            }
+            case UUID:{
+                return java.util.UUID.fromString(s);
+            }
+            case FLOAT:{
+                return Float.parseFloat(s);
+            }
+            case SHORT:{
+                return Short.parseShort(s);
+            }
+            case DOUBLE:{
+                return Double.parseDouble(s);
+            }
+            case STRING:{
+                return s;
+            }
+            case BOOLEAN:{
+                return Boolean.parseBoolean(s);
+            }
+            case FORMATTEXT:{
+                return new FormatText(s);
+            }
+            case ITEMSTACK:{
+                return new Item(s).getItemStack();
+            }
+            default:{
+                return null;
+            }
         }
     }
 }
