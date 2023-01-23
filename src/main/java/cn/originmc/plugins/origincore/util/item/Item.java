@@ -1,20 +1,17 @@
 package cn.originmc.plugins.origincore.util.item;
 
+import cn.originmc.plugins.origincore.OriginCore;
 import cn.originmc.plugins.origincore.util.text.FormatText;
-import de.tr7zw.nbtapi.NBT;
-import de.tr7zw.nbtapi.NBTCompound;
-import de.tr7zw.nbtapi.NBTItem;
+import de.tr7zw.nbtapi.*;
 import de.tr7zw.nbtapi.iface.ReadWriteNBT;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 public class Item {
     private ItemStack itemStack;
@@ -366,6 +363,151 @@ public class Item {
         nbtItem.addCompound( spaceName);
         setItemStack(nbtItem.getItem());
     }
+    public void putMap(String key,Map<String,Object> nbtMap){
+        NBTItem nbtItem = new NBTItem(getItemStack());
+        if (!nbtItem.hasTag(key)){
+            addSpace(key);
+        }
+        NBTCompoundList space=nbtItem.getCompoundList(key);
+        NBTListCompound mod=space.addCompound();
+        for (Map.Entry<String, Object> entry : nbtMap.entrySet()) {
+            DataType dataType = DataType.getType(entry.getValue());
+            switch (dataType) {
+                case INT: {
+                    mod.setInteger(entry.getKey(), (Integer) entry.getValue());
+                    break;
+                }
+                case FLOAT: {
+                    mod.setFloat(entry.getKey(), (Float) entry.getValue());
+                    break;
+                }
+                case DOUBLE: {
+                    mod.setDouble(entry.getKey(), (Double) entry.getValue());
+                    break;
+                }
+                case STRING: {
+                    mod.setString(entry.getKey(), (String) entry.getValue());
+                    break;
+                }
+                case ITEMSTACK: {
+                    mod.setItemStack(entry.getKey(), (ItemStack) entry.getValue());
+                    break;
+                }
+                case BOOLEAN: {
+                    mod.setBoolean(entry.getKey(), (Boolean) entry.getValue());
+                    break;
+                }
+                case LONG: {
+                    mod.setLong(entry.getKey(), (Long) entry.getValue());
+                    break;
+                }
+                case UUID: {
+                    mod.setUUID(entry.getKey(), (UUID) entry.getValue());
+                    break;
+                }
+                case SHORT: {
+                    mod.setShort(entry.getKey(), (Short) entry.getValue());
+                    break;
+                }
+                case INTARRAY: {
+                    mod.setIntArray(entry.getKey(), (int[]) entry.getValue());
+                    break;
+                }
+                case ITEMSTACKARRAY: {
+                    mod.setItemStackArray(entry.getKey(), (ItemStack[]) entry.getValue());
+                    break;
+                }
+                case BYTE: {
+                    mod.setByte(entry.getKey(), (Byte) entry.getValue());
+                    break;
+                }
+                case BYTEARRAY: {
+                    mod.setByteArray(entry.getKey(), (byte[]) entry.getValue());
+                    break;
+                }
+                case FORMATTEXT: {
+                    FormatText formatText = (FormatText) entry.getValue();
+                    mod.setString(entry.getKey(), formatText.getFormatString());
+                    break;
+                }
+            }
+        }
+        setItemStack(nbtItem.getItem());
+    }
+    public void putMap(String key,String spaceName,Map<String,Object> nbtMap){
+        NBTItem nbtItem = new NBTItem(getItemStack());
+        if (!nbtItem.hasTag(key)){
+            nbtItem.addCompound(key);
+        }
+        NBTCompoundList space=nbtItem.getCompoundList(key);
+        NBTListCompound allMod=space.get(0);
+        NBTCompoundList space1=allMod.getCompoundList(spaceName);
+        NBTListCompound mod=space1.addCompound();
+        space1.addCompound(mod);
+        for (Map.Entry<String, Object> entry : nbtMap.entrySet()) {
+            DataType dataType = DataType.getType(entry.getValue());
+            switch (dataType) {
+                case INT: {
+                    mod.setInteger(entry.getKey(), (Integer) entry.getValue());
+                    break;
+                }
+                case FLOAT: {
+                    mod.setFloat(entry.getKey(), (Float) entry.getValue());
+                    break;
+                }
+                case DOUBLE: {
+                    mod.setDouble(entry.getKey(), (Double) entry.getValue());
+                    break;
+                }
+                case STRING: {
+                    mod.setString(entry.getKey(), (String) entry.getValue());
+                    break;
+                }
+                case ITEMSTACK: {
+                    mod.setItemStack(entry.getKey(), (ItemStack) entry.getValue());
+                    break;
+                }
+                case BOOLEAN: {
+                    mod.setBoolean(entry.getKey(), (Boolean) entry.getValue());
+                    break;
+                }
+                case LONG: {
+                    mod.setLong(entry.getKey(), (Long) entry.getValue());
+                    break;
+                }
+                case UUID: {
+                    mod.setUUID(entry.getKey(), (UUID) entry.getValue());
+                    break;
+                }
+                case SHORT: {
+                    mod.setShort(entry.getKey(), (Short) entry.getValue());
+                    break;
+                }
+                case INTARRAY: {
+                    mod.setIntArray(entry.getKey(), (int[]) entry.getValue());
+                    break;
+                }
+                case ITEMSTACKARRAY: {
+                    mod.setItemStackArray(entry.getKey(), (ItemStack[]) entry.getValue());
+                    break;
+                }
+                case BYTE: {
+                    mod.setByte(entry.getKey(), (Byte) entry.getValue());
+                    break;
+                }
+                case BYTEARRAY: {
+                    mod.setByteArray(entry.getKey(), (byte[]) entry.getValue());
+                    break;
+                }
+                case FORMATTEXT: {
+                    FormatText formatText = (FormatText) entry.getValue();
+                    mod.setString(entry.getKey(), formatText.getFormatString());
+                    break;
+                }
+            }
+        }
+        setItemStack(nbtItem.getItem());
+    }
     /**
      *     隐藏编号含义
      *    1 - 隐藏附魔
@@ -398,7 +540,7 @@ public class Item {
         Enchantment enchantment=Enchantment.getByKey(NamespacedKey.fromString(id));
         if (enchantment != null) {
             itemMeta.addEnchant(enchantment,lvl,flag);
-            getItemStack() .setItemMeta(itemMeta);
+            getItemStack().setItemMeta(itemMeta);
         }
     }
     public int getEnchantmentsLevel(String id){

@@ -20,7 +20,7 @@ public class CoolDownListener {
                     cancel();
                 }
             }
-        }.runTaskTimerAsynchronously(OriginCore.getInstance(),0,20);
+        }.runTaskTimerAsynchronously(OriginCore.getInstance(),0,1);
     }
     public static boolean register(long time,UUID id){
         return queue.createCoolDown(time,id);
