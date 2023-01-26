@@ -1,9 +1,9 @@
 package cn.originmc.plugins.origincore.util.random;
 
+import cn.originmc.plugins.origincore.OriginCore;
 import cn.originmc.plugins.origincore.util.list.ListUtil;
 
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Randomizer {
     /**
@@ -16,7 +16,47 @@ public class Randomizer {
         Random r=new Random();
         return r.nextInt(endInt-startInt+1)+startInt;
     }
-
+    public static List<Object> randomObjects(Map<Object,Double> objectMap,int outputSize){
+        Map<Object,Double> map=new HashMap<>();
+        List<Object> objects=new ArrayList<>();
+        for (int i=0;i<outputSize;i++){
+            double amount=0;
+            map.clear();
+            for (Map.Entry<Object, Double> entry : objectMap.entrySet()) {
+                amount+=entry.getValue();
+                map.put(entry.getKey(),amount);
+            }
+            double randomNum=Randomizer.getDoubleRandom(0,amount,2);
+            for (Map.Entry<Object, Double> entry : map.entrySet()) {
+                if (entry.getValue()>=randomNum){
+                    objects.add(entry.getKey());
+                    objectMap.remove(entry.getKey());
+                    break;
+                }
+            }
+        }
+        return objects;
+    }
+    public static List<Object> randomObjects(Map<Object,Double> objectMap,int outputSize,int sign){
+        Map<Object,Double> map=new HashMap<>();
+        List<Object> objects=new ArrayList<>();
+        for (int i=0;i<outputSize;i++){
+            double amount=0;
+            for (Map.Entry<Object, Double> entry : objectMap.entrySet()) {
+                map.put(entry.getKey(),amount);
+                amount+=entry.getValue();
+            }
+            double randomNum=Randomizer.getDoubleRandom(0,amount,sign);
+            for (Map.Entry<Object, Double> entry : map.entrySet()) {
+                if (entry.getValue()>=randomNum){
+                    objects.add(entry.getKey());
+                    objectMap.remove(entry.getKey());
+                    break;
+                }
+            }
+        }
+        return objects;
+    }
     /**
      * 获取指定长度的随机字符串
      * @param len 字符串长度
