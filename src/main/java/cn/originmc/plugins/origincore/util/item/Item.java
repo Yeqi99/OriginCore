@@ -1,10 +1,8 @@
 package cn.originmc.plugins.origincore.util.item;
 
-import cn.originmc.plugins.origincore.OriginCore;
 import cn.originmc.plugins.origincore.util.text.FormatText;
 import de.tr7zw.nbtapi.*;
 import de.tr7zw.nbtapi.iface.ReadWriteNBT;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;

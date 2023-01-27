@@ -12,5 +12,9 @@ public class HookManager {
         VaultHook.hook(OriginCore.getInstance());
         PlayerPointsHook.hook(OriginCore.getInstance());
         LuckPermsHook.hook(OriginCore.getInstance());
+        MythicLibHook.hook(OriginCore.getInstance());
+        MythicMobsHook.hook(OriginCore.getInstance());
+        MMOItemsHook.hook(OriginCore.getInstance());
+        ItemsAdderHook.hook(OriginCore.getInstance());
     }
 }

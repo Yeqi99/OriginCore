@@ -13,3 +13,7 @@ softdepend:
   - ItemsAdder
   - MythicLib
   - MythicMobs
+commands:
+  OriginCore:
+    aliases:
+      - oc
