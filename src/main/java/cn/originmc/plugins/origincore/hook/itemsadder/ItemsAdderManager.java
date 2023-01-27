@@ -42,10 +42,10 @@ public class ItemsAdderManager {
         customBlock.place(location);
         return true;
     }
-    public CustomMob spawnCustomMob(String id,Location location){
+    public static CustomMob spawnCustomMob(String id,Location location){
         return CustomMob.spawn(id,location);
     }
-    public CustomMob getCustomMob(Entity entity){
+    public static CustomMob getCustomMob(Entity entity){
         return CustomMob.byAlreadySpawned(entity);
     }
 }

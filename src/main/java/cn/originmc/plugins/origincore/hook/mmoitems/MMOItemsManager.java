@@ -8,10 +8,10 @@ import net.Indyuce.mmoitems.api.item.mmoitem.MMOItem;
 import org.bukkit.inventory.ItemStack;
 
 public class MMOItemsManager {
-    public MMOItem getMMOItem(String type, String name){
+    public static MMOItem getMMOItem(String type, String name){
         return MMOItems.plugin.getMMOItem(MMOItems.plugin.getTypes().get(type), name);
     }
-    public ItemStack getMMOItemSkill(ItemStack itemStack, String type, String name){
+    public static ItemStack getMMOItemSkill(ItemStack itemStack, String type, String name){
         MMOItem mmoItem=getMMOItem(type,name);
         if (mmoItem==null){
             return itemStack;

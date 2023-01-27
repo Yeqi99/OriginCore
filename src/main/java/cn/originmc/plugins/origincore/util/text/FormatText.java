@@ -136,4 +136,17 @@ public class FormatText {
         this.originText = originText;
         getData();
     }
+    public boolean addValue(String key,String value){
+        if (hasKey(key)){
+            return false;
+        }
+        getKeyMap().put(key,value);
+        originText =getFormatString();
+        return true;
+    }
+    public boolean setValue(String key,String value){
+        getKeyMap().put(key,value);
+        originText =getFormatString();
+        return true;
+    }
 }

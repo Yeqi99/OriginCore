@@ -7,10 +7,11 @@
     <id>origin-craft</id>
     <url>http://address.originmc.cn:8081/repository/maven-releases/</url>
 </repository>
+
 <dependency>
     <groupId>cn.originmc.plugins</groupId>
     <artifactId>origin-core</artifactId>
-    <version>2.12</version>
+    <version>2.20</version>
     <scope>provided</scope>
 </dependency>
 ```

@@ -75,7 +75,7 @@ public class LuckPermsManager {
     public static String getMeta(Player player,String key){
         return getUser(player).getCachedData().getMetaData().getMetaValue(key);
     }
-    public static  void setMeta(String groupName,String key,String value){
+    public static void setMeta(String groupName,String key,String value){
         Group group=getGroup(groupName);
         MetaNode node = MetaNode.builder(key, value).build();
         group.data().clear(NodeType.META.predicate(mn -> mn.getMetaKey().equals(key)));
