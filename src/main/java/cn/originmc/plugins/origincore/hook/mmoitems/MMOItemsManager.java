@@ -34,6 +34,48 @@ public class MMOItemsManager {
         }
         return nbtItem.getItem();
     }
+    public static ItemStack setMMOItemSkill(ItemStack itemStack, String skillName, String castMode, Map<String,Integer> setting){
+        NBTItem nbtItem=new NBTItem(itemStack);
+        if (!nbtItem.hasTag("MMOITEMS_ABILITY")){
+            nbtItem.addCompound("MMOITEMS_ABILITY");
+        }
+        if (!hasMMOItemsSkill(nbtItem.getItem(),skillName)){
+            NBTCompoundList space=nbtItem.getCompoundList("MMOITEMS_ABILITY");
+            NBTListCompound mod=space.addCompound();
+            mod.setString("Id",skillName);
+            mod.setString("CastMode",castMode);
+            NBTCompound skillSetting=mod.addCompound("Modifiers");
+            for (Map.Entry<String, Integer> entry : setting.entrySet()) {
+                skillSetting.setInteger(entry.getKey(),entry.getValue());
+            }
+        }else {
+            NBTCompoundList space=nbtItem.getCompoundList("MMOITEMS_ABILITY");
+            for (int i=0;i<space.size();i++){
+                NBTListCompound mod=space.get(i);
+                String id=mod.getString("Id");
+                if (id.equalsIgnoreCase(skillName)){
+                    mod.setString("CastMode",castMode);
+                    NBTCompound skillSetting=mod.addCompound("Modifiers");
+                    for (Map.Entry<String, Integer> entry : setting.entrySet()) {
+                        skillSetting.setInteger(entry.getKey(),entry.getValue());
+                    }
+                }
+            }
+        }
+        return nbtItem.getItem();
+    }
+    public static boolean hasMMOItemsSkill(ItemStack itemStack, String skillName){
+        NBTItem nbtItem=new NBTItem(itemStack);
+        NBTCompoundList space=nbtItem.getCompoundList("MMOITEMS_ABILITY");
+        for (int i=0;i<space.size();i++){
+            NBTListCompound mod=space.get(i);
+            String id=mod.getString("Id");
+            if (id.equalsIgnoreCase(skillName)){
+                return true;
+            }
+        }
+        return false;
+    }
     public static Map<String,Integer> getMMOItemsSkillSetting(ItemStack itemStack, String skillName){
         NBTItem nbtItem=new NBTItem(itemStack);
         NBTCompoundList space=nbtItem.getCompoundList("MMOITEMS_ABILITY");
