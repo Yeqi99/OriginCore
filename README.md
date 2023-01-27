@@ -11,7 +11,7 @@
 <dependency>
     <groupId>cn.originmc.plugins</groupId>
     <artifactId>origin-core</artifactId>
-    <version>2.20</version>
+    <version>2.21</version>
     <scope>provided</scope>
 </dependency>
 ```
