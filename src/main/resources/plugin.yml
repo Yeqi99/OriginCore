@@ -9,3 +9,7 @@ softdepend:
   - PlayerPoints
   - Vault
   - LuckPerms
+  - MMOItems
+  - ItemsAdder
+  - MythicLib
+  - MythicMobs

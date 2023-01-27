@@ -87,6 +87,13 @@
             <id>rosewood-repo</id>
             <url>https://repo.rosewooddev.io/repository/public/</url>
         </repository>
+        <!-- MythicMobs -->
+        <repository>
+            <id>nexus</id>
+            <name>Lumine Releases</name>
+            <url>https://mvn.lumine.io/repository/maven-public/</url>
+        </repository>
+
     </repositories>
 
     <dependencies>
@@ -147,6 +154,37 @@
             <groupId>net.kyori</groupId>
             <artifactId>adventure-platform-bukkit</artifactId>
             <version>4.2.0</version>
+        </dependency>
+        <!-- MythicLib -->
+        <dependency>
+            <groupId>libs</groupId>
+            <artifactId>mythiclib</artifactId>
+            <scope>system</scope>
+            <version>1.5</version>
+            <systemPath>${project.basedir}/libs/MythicLib-1.5.jar</systemPath>
+        </dependency>
+        <!-- MMOItems -->
+        <dependency>
+            <groupId>libs</groupId>
+            <artifactId>mmoitems</artifactId>
+            <scope>system</scope>
+            <version>6.9.1</version>
+            <systemPath>${project.basedir}/libs/MMOItems-6.9.1.jar</systemPath>
+        </dependency>
+        <!-- ItemsAdder -->
+        <dependency>
+            <groupId>libs</groupId>
+            <artifactId>itemsadder</artifactId>
+            <scope>system</scope>
+            <version>3.3.0b-r5</version>
+            <systemPath>${project.basedir}/libs/ItemsAdder_3.3.0b-r5.jar</systemPath>
+        </dependency>
+        <!-- MythicMobs -->
+        <dependency>
+            <groupId>io.lumine</groupId>
+            <artifactId>Mythic-Dist</artifactId>
+            <version>5.2.1</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
