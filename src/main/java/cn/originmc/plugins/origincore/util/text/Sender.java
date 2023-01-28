@@ -1,5 +1,6 @@
 package cn.originmc.plugins.origincore.util.text;
 
+import cn.originmc.plugins.origincore.hook.PlaceholderAPIHook;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;

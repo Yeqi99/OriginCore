@@ -25,6 +25,16 @@ public class CoolDownListener {
     public static boolean register(long time,UUID id){
         return queue.createCoolDown(time,id);
     }
+    public static boolean register(long time,UUID id,String sId){
+        return queue.add(time,id,sId);
+    }
+    public static long getTime(UUID id,String sId){
+        if (queue.hasCoolDown(id)){
+            return queue.getTime(id,sId);
+        }else {
+            return 0;
+        }
+    }
     public static boolean isCoolDown(UUID id){
         return queue.hasCoolDown(id);
     }

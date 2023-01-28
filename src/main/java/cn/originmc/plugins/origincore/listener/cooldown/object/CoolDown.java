@@ -4,6 +4,7 @@ import java.util.UUID;
 
 public class CoolDown {
     private UUID id;
+    private String sId;
     private long time;
     private String remarks;
     public CoolDown(long time){
@@ -12,6 +13,11 @@ public class CoolDown {
     }
     public CoolDown(long time,UUID id){
         setId(id);
+        setTime(time);
+    }
+    public CoolDown(long time,UUID id,String sId){
+        setId(id);
+        setsId(sId);
         setTime(time);
     }
     public boolean go(){
@@ -42,5 +48,13 @@ public class CoolDown {
 
     public String getRemarks() {
         return remarks;
+    }
+
+    public String getsId() {
+        return sId;
+    }
+
+    public void setsId(String sId) {
+        this.sId = sId;
     }
 }
