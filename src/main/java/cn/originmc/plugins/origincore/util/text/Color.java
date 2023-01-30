@@ -37,7 +37,6 @@ public class Color {
             }
         }
         return returnStr;
-
     }
     public static List<String> removeColor(List<String> inList){
         List<String> returnList=new ArrayList<>();

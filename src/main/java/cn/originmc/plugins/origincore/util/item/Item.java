@@ -1,11 +1,16 @@
 package cn.originmc.plugins.origincore.util.item;
 
 import cn.originmc.plugins.origincore.util.text.FormatText;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
 import de.tr7zw.nbtapi.*;
 import de.tr7zw.nbtapi.iface.ReadWriteNBT;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -304,6 +309,30 @@ public class Item {
                 return null;
             }
         }
+    }
+    private UUID getAttributeUUID(Attribute attribute,String id){
+        ItemMeta itemMeta=getItemStack().getItemMeta();
+        if (!itemMeta.hasAttributeModifiers()){
+            return null;
+        }
+        for (AttributeModifier mod : itemMeta.getAttributeModifiers(attribute)) {
+            if (mod.getName().equalsIgnoreCase(id)){
+                return mod.getUniqueId();
+            }
+        }
+        return null;
+    }
+    public void addAttribute(String id, Attribute attribute, double value, AttributeModifier.Operation operation,EquipmentSlot slot){
+        ItemMeta itemMeta=getItemStack().getItemMeta();
+        UUID uuid=getAttributeUUID(attribute,id);
+        AttributeModifier attributeModifier;
+        if (uuid==null){
+            attributeModifier=new AttributeModifier(UUID.randomUUID(),id,value,operation,slot);
+        }else {
+            attributeModifier=new AttributeModifier(uuid,id,value,operation,slot);
+        }
+        itemMeta.addAttributeModifier(attribute,attributeModifier);
+        getItemStack().setItemMeta(itemMeta);
     }
     public void addDouble(String key,double addValue){
         if (hasTag(key)){

@@ -5,6 +5,7 @@ import cn.originmc.plugins.origincore.hook.PlaceholderAPIHook;
 import cn.originmc.plugins.origincore.hook.PlayerPointsHook;
 import cn.originmc.plugins.origincore.hook.VaultHook;
 import cn.originmc.plugins.origincore.util.list.ListUtil;
+import cn.originmc.plugins.origincore.util.location.OCLocation;
 import cn.originmc.plugins.origincore.util.particle.ParticleGenerator;
 import cn.originmc.plugins.origincore.util.text.FormatText;
 import cn.originmc.plugins.origincore.util.text.Sender;
@@ -442,7 +443,7 @@ public class Action {
                 }else if(locationList.get(1).contains("!")){
                     double x= Double.parseDouble(locationList.get(1).replace("!",""));
                     locationList.set(1,x+"");
-                }else {
+                }else{
                     locationList.set(1,player.getLocation().getX()+Double.parseDouble(locationList.get(1))+"");
                 }
 
