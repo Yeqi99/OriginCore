@@ -1,10 +1,12 @@
 package cn.originmc.plugins.origincore.util.item;
 
+import cn.originmc.plugins.origincore.OriginCore;
 import cn.originmc.plugins.origincore.util.text.FormatText;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import de.tr7zw.nbtapi.*;
 import de.tr7zw.nbtapi.iface.ReadWriteNBT;
+import io.lumine.mythic.lib.parser.client.eval.api.IFieldElement0Function;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
@@ -327,12 +329,50 @@ public class Item {
         UUID uuid=getAttributeUUID(attribute,id);
         AttributeModifier attributeModifier;
         if (uuid==null){
-            attributeModifier=new AttributeModifier(UUID.randomUUID(),id,value,operation,slot);
+            uuid=UUID.randomUUID();
+            attributeModifier=new AttributeModifier(uuid,id,value,operation,slot);
         }else {
             attributeModifier=new AttributeModifier(uuid,id,value,operation,slot);
         }
-        itemMeta.addAttributeModifier(attribute,attributeModifier);
+        Collection<AttributeModifier> oldAMod= itemMeta.getAttributeModifiers(attribute);
+        if (oldAMod==null){
+            itemMeta.addAttributeModifier(attribute,attributeModifier);
+            return;
+        }
+        Collection<AttributeModifier> newAMod= new ArrayList<>();
+        for (AttributeModifier modifier : oldAMod) {
+            if (modifier.getUniqueId().toString().equalsIgnoreCase(uuid.toString())){
+                continue;
+            }
+            newAMod.add(modifier);
+        }
+        itemMeta.removeAttributeModifier(attribute);
+        newAMod.add(attributeModifier);
+        for (AttributeModifier modifier : newAMod) {
+            itemMeta.addAttributeModifier(attribute,modifier);
+        }
         getItemStack().setItemMeta(itemMeta);
+    }
+    public double getAttributeValue(String id, Attribute attribute, AttributeModifier.Operation operation,EquipmentSlot slot){
+        ItemMeta itemMeta=getItemStack().getItemMeta();
+        UUID uuid=getAttributeUUID(attribute,id);
+        if (uuid==null){
+            return 0;
+        }
+        Collection<AttributeModifier> oldAMod= itemMeta.getAttributeModifiers(attribute);
+        if (oldAMod==null){
+            return 0;
+        }
+        for (AttributeModifier modifier : oldAMod) {
+            if (modifier.getUniqueId().toString().equalsIgnoreCase(uuid.toString())){
+                if (modifier.getOperation()==operation){
+                    if (modifier.getSlot() == slot) {
+                        return modifier.getAmount();
+                    }
+                }
+            }
+        }
+        return 0;
     }
     public void addDouble(String key,double addValue){
         if (hasTag(key)){

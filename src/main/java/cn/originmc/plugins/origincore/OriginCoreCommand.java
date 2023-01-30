@@ -11,10 +11,13 @@ import de.tr7zw.nbtapi.NBTList;
 import de.tr7zw.nbtapi.NBTListCompound;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -87,6 +90,15 @@ public class OriginCoreCommand implements CommandExecutor {
         }else if (c.is(0,"msgAll")){
             String msg=c.getParameter(1);
             OriginCore.getSender().sendToAllPlayer(msg);
+        }else if (c.is(0,"attribute")){
+            Item item=new Item(c.getPlayer().getInventory().getItemInMainHand());
+            String id=c.getParameter(1);
+            Attribute attribute= Attribute.valueOf(c.getParameter(2));
+            AttributeModifier.Operation operation= AttributeModifier.Operation.valueOf(c.getParameter(3));
+            EquipmentSlot slot=EquipmentSlot.valueOf(c.getParameter(4));
+            double value= Double.parseDouble(c.getParameter(5));
+            item.addAttribute(id,attribute,value,operation,slot);
+            c.getPlayer().getInventory().setItemInMainHand(item.getItemStack());
         }
         return true;
     }
