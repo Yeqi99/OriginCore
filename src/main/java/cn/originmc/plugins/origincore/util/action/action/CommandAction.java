@@ -2,7 +2,6 @@ package cn.originmc.plugins.origincore.util.action.action;
 
 import cn.originmc.plugins.origincore.hook.PlaceholderAPIHook;
 import cn.originmc.plugins.origincore.util.action.AbstractAction;
-import cn.originmc.plugins.origincore.util.action.ObjectType;
 import cn.originmc.plugins.origincore.util.text.FormatText;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -14,13 +13,18 @@ import java.util.Map;
 
 public class CommandAction extends AbstractAction {
 
-    public CommandAction(JavaPlugin plugin, FormatText actionSetting, List<Boolean> beforeExecuteResult, Map<ObjectType, Object> objectMap) {
+
+    public CommandAction(JavaPlugin plugin, FormatText actionSetting, List<Boolean> beforeExecuteResult, Map<String, Object> objectMap) {
         super(plugin, actionSetting, beforeExecuteResult, objectMap);
+    }
+
+    public CommandAction(JavaPlugin plugin, FormatText actionSetting, List<Boolean> beforeExecuteResult) {
+        super(plugin, actionSetting, beforeExecuteResult);
     }
 
     @Override
     public boolean execute() {
-        if (!getPreconditions(getBeforeExecuteResult())){
+        if (!canExecute()){
             return false;
         }
         String commandMode=getActionSetting().getValue("mode");
@@ -32,7 +36,7 @@ public class CommandAction extends AbstractAction {
         if (PlaceholderAPIHook.isLoad()){
             command=PlaceholderAPIHook.getPlaceholder(player,command);
         }
-        if (commandMode.equalsIgnoreCase("self")){
+        if (commandMode.equalsIgnoreCase("player")){
             String finalCommand = command;
             new BukkitRunnable() {
                 @Override

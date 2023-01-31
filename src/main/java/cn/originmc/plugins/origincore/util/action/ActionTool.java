@@ -6,7 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Deprecated
 public class ActionTool {
     /**
      * 从格式化字符串中获取Action

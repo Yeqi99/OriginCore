@@ -4,6 +4,7 @@ import cn.originmc.plugins.origincore.OriginCore;
 import cn.originmc.plugins.origincore.hook.PlaceholderAPIHook;
 import cn.originmc.plugins.origincore.hook.PlayerPointsHook;
 import cn.originmc.plugins.origincore.hook.VaultHook;
+import cn.originmc.plugins.origincore.util.action.action.MessageAction;
 import cn.originmc.plugins.origincore.util.list.ListUtil;
 import cn.originmc.plugins.origincore.util.location.OCLocation;
 import cn.originmc.plugins.origincore.util.particle.ParticleGenerator;
@@ -19,7 +20,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
-
+@Deprecated
 public class Action {
     private ActionType type;
     private FormatText formatText;
@@ -101,7 +102,6 @@ public class Action {
                 }
             }
             case PARTICLE:{
-                new Sender(OriginCore.getInstance()).sendToAllPlayer("1111111111");
                 List<String> locationList= ListUtil.getListFromFormatStr(formatText.getValue("location"));
                 List<String> offsetList= ListUtil.getListFromFormatStr(formatText.getValue("offset"));
                 String rgb1=formatText.getValue("rgb");

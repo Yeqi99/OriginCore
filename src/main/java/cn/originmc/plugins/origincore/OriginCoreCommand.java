@@ -97,7 +97,7 @@ public class OriginCoreCommand implements CommandExecutor {
             AttributeModifier.Operation operation= AttributeModifier.Operation.valueOf(c.getParameter(3));
             EquipmentSlot slot=EquipmentSlot.valueOf(c.getParameter(4));
             double value= Double.parseDouble(c.getParameter(5));
-            item.addAttribute(id,attribute,value,operation,slot);
+            item.setAttribute(id,attribute,value,operation,slot);
             c.getPlayer().getInventory().setItemInMainHand(item.getItemStack());
         }
         return true;

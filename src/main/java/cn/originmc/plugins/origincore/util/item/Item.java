@@ -324,16 +324,14 @@ public class Item {
         }
         return null;
     }
-    public void addAttribute(String id, Attribute attribute, double value, AttributeModifier.Operation operation,EquipmentSlot slot){
+    public void setAttribute(String id, Attribute attribute, double value, AttributeModifier.Operation operation,EquipmentSlot slot){
         ItemMeta itemMeta=getItemStack().getItemMeta();
         UUID uuid=getAttributeUUID(attribute,id);
         AttributeModifier attributeModifier;
         if (uuid==null){
             uuid=UUID.randomUUID();
-            attributeModifier=new AttributeModifier(uuid,id,value,operation,slot);
-        }else {
-            attributeModifier=new AttributeModifier(uuid,id,value,operation,slot);
         }
+        attributeModifier=new AttributeModifier(uuid,id,value,operation,slot);
         Collection<AttributeModifier> oldAMod= itemMeta.getAttributeModifiers(attribute);
         if (oldAMod==null){
             itemMeta.addAttributeModifier(attribute,attributeModifier);
@@ -373,6 +371,9 @@ public class Item {
             }
         }
         return 0;
+    }
+    public void addAttributeValue(String id,Attribute attribute,double value,AttributeModifier.Operation operation,EquipmentSlot slot){
+        setAttribute(id,attribute,getAttributeValue(id,attribute,operation,slot)+value,operation,slot);
     }
     public void addDouble(String key,double addValue){
         if (hasTag(key)){
@@ -600,6 +601,15 @@ public class Item {
     }
     public int getCustomModelData(){
         return (int) get("CustomModelData",DataType.INT);
+    }
+    public Material getMaterial(){
+        return getItemStack().getType();
+    }
+    public void setMaterial(String material){
+        getItemStack().setType(Material.valueOf(material));
+    }
+    public void setMaterial(Material material){
+        getItemStack().setType(material);
     }
     public void setEnchantment(String id,int lvl,boolean flag){
         ItemMeta itemMeta= getItemStack().getItemMeta();

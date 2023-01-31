@@ -179,4 +179,11 @@ public class Sender {
         BukkitAudiences audience= BukkitAudiences.create(getPlugin());
         audience.player(player).sendMessage(Component.text(returnMessage));
     }
+    public void sendPAPIToOnline(String inStr){
+        for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+            String message=PlaceholderAPIHook.getPlaceholder(onlinePlayer,inStr);
+            sendToPlayer(onlinePlayer,message);
+        }
+    }
+
 }
