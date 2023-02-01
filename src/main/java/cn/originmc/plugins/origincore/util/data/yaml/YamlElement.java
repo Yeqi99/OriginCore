@@ -25,7 +25,6 @@ public class YamlElement {
             throw new RuntimeException(e);
         }
     }
-
     public String getId() {
         return id;
     }

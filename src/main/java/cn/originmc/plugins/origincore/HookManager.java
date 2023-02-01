@@ -1,20 +1,21 @@
 package cn.originmc.plugins.origincore;
 
 import cn.originmc.plugins.origincore.hook.*;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class HookManager {
     /**
      * 尝试与所有插件挂钩
      */
-    public static void hookAll(){
-        ProtocolLibHook.hook(OriginCore.getInstance());
-        PlaceholderAPIHook.hook(OriginCore.getInstance());
-        VaultHook.hook(OriginCore.getInstance());
-        PlayerPointsHook.hook(OriginCore.getInstance());
-        LuckPermsHook.hook(OriginCore.getInstance());
-        MythicLibHook.hook(OriginCore.getInstance());
-        MythicMobsHook.hook(OriginCore.getInstance());
-        MMOItemsHook.hook(OriginCore.getInstance());
-        ItemsAdderHook.hook(OriginCore.getInstance());
+    public static void hookAll(JavaPlugin plugin){
+        ProtocolLibHook.hook(plugin);
+        PlaceholderAPIHook.hook(plugin);
+        VaultHook.hook(plugin);
+        PlayerPointsHook.hook(plugin);
+        LuckPermsHook.hook(plugin);
+        MythicLibHook.hook(plugin);
+        MythicMobsHook.hook(plugin);
+        MMOItemsHook.hook(plugin);
+        ItemsAdderHook.hook(plugin);
     }
 }

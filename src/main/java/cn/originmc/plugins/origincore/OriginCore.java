@@ -8,7 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class OriginCore extends JavaPlugin {
     private static JavaPlugin instance;
     private static Sender sender;
-    private static final String VERSION = "2.29";
+    private static final String VERSION = "2.30";
     public static JavaPlugin getInstance() {
         return instance;
     }
@@ -22,7 +22,7 @@ public final class OriginCore extends JavaPlugin {
         instance=this;
         sender=new Sender(this);
         saveDefaultConfig();
-        HookManager.hookAll();
+        HookManager.hookAll(this);
         CommandRegister.register(this,new OriginCoreCommand(),"OriginCore");
         if (getConfig().getBoolean("cool-down-listener.enable")){
             CoolDownListener.setEnable(true);

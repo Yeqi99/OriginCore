@@ -7,6 +7,7 @@ import com.google.common.collect.Multimap;
 import de.tr7zw.nbtapi.*;
 import de.tr7zw.nbtapi.iface.ReadWriteNBT;
 import io.lumine.mythic.lib.parser.client.eval.api.IFieldElement0Function;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
@@ -332,9 +333,15 @@ public class Item {
             uuid=UUID.randomUUID();
         }
         attributeModifier=new AttributeModifier(uuid,id,value,operation,slot);
+        if (!itemMeta.hasAttributeModifiers()){
+            itemMeta.addAttributeModifier(attribute,attributeModifier);
+            getItemStack().setItemMeta(itemMeta);
+            return;
+        }
         Collection<AttributeModifier> oldAMod= itemMeta.getAttributeModifiers(attribute);
         if (oldAMod==null){
             itemMeta.addAttributeModifier(attribute,attributeModifier);
+            getItemStack().setItemMeta(itemMeta);
             return;
         }
         Collection<AttributeModifier> newAMod= new ArrayList<>();
