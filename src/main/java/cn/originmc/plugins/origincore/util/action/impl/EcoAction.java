@@ -1,28 +1,28 @@
-package cn.originmc.plugins.origincore.util.action.action;
+package cn.originmc.plugins.origincore.util.action.impl;
 
 import cn.originmc.plugins.origincore.hook.PlayerPointsHook;
 import cn.originmc.plugins.origincore.hook.VaultHook;
-import cn.originmc.plugins.origincore.util.action.AbstractAction;
+import cn.originmc.plugins.origincore.util.action.object.abs.AbstractAction;
 import cn.originmc.plugins.origincore.util.text.FormatText;
-import io.lumine.mythic.core.skills.conditions.all.LineOfSightCondition;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.List;
 import java.util.Map;
 
 public class EcoAction extends AbstractAction {
-    public EcoAction(JavaPlugin plugin, FormatText actionSetting, List<Boolean> beforeExecuteResult, Map<String, Object> objectMap) {
-        super(plugin, actionSetting, beforeExecuteResult, objectMap);
+
+
+    public EcoAction(FormatText actionSetting, Map<String, Object> objectMap) {
+        super(actionSetting, objectMap);
     }
 
-    public EcoAction(JavaPlugin plugin, FormatText actionSetting, List<Boolean> beforeExecuteResult) {
-        super(plugin, actionSetting, beforeExecuteResult);
+    public EcoAction(FormatText actionSetting) {
+        super(actionSetting);
     }
 
     @Override
-    public boolean execute() {
-        if (!canExecute()){
+    public boolean execute(List<Boolean> beforeExecuteResult) {
+        if (!canExecute(beforeExecuteResult)){
             return false;
         }
         String ecoMode=getActionSetting().getValue("mode");

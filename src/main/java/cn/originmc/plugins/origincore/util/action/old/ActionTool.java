@@ -1,4 +1,4 @@
-package cn.originmc.plugins.origincore.util.action;
+package cn.originmc.plugins.origincore.util.action.old;
 
 import cn.originmc.plugins.origincore.util.text.FormatText;
 import org.bukkit.entity.Player;
@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Deprecated
 public class ActionTool {
     /**
@@ -14,6 +15,7 @@ public class ActionTool {
      * @param formatString 格式化字符串
      * @return Action动作
      */
+    @Deprecated
     public static Action getAction(JavaPlugin plugin, String formatString){
         FormatText formatText=new FormatText(formatString);
         return new Action(plugin,formatText);
@@ -25,6 +27,7 @@ public class ActionTool {
      * @param formatStringList 格式化字符串列表
      * @return Action动作列表
      */
+    @Deprecated
     public static List<Action> getActionList(JavaPlugin plugin,List<String> formatStringList){
         List<Action> actionList=new ArrayList<>();
         for (String s : formatStringList) {
@@ -40,6 +43,7 @@ public class ActionTool {
      * @param actionList 动作列表
      * @return 执行结果
      */
+    @Deprecated
     public static boolean execute(Player player,List<Action> actionList){
         List<Boolean> results=new ArrayList<>();
         for (Action action : actionList) {
@@ -48,6 +52,7 @@ public class ActionTool {
         }
         return true;
     }
+    @Deprecated
     public static boolean execute(Player player,List<Action> actionList,List<Object> objects){
         List<Boolean> results=new ArrayList<>();
         for (Action action : actionList) {
@@ -62,6 +67,7 @@ public class ActionTool {
      * @param actionList 动作列表
      * @return 预览结果
      */
+    @Deprecated
     public static boolean viewExecute(Player player,List<Action> actionList){
         for (Action action : actionList) {
             //某个动作失败则直接中断队列
@@ -78,6 +84,7 @@ public class ActionTool {
      * @param formatString 格式化字符串
      * @return 执行结果
      */
+    @Deprecated
     public static boolean execute(JavaPlugin plugin,Player player,String formatString){
         return getAction(plugin,formatString).execute(player);
     }
@@ -89,6 +96,7 @@ public class ActionTool {
      * @param formatStringList 格式化字符串列表
      * @return 执行结果
      */
+    @Deprecated
     public static boolean execute(JavaPlugin plugin,Player player,List<String> formatStringList){
         for (String s : formatStringList) {
             //某个动作失败则直接中断队列

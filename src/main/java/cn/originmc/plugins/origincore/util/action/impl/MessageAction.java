@@ -1,11 +1,10 @@
-package cn.originmc.plugins.origincore.util.action.action;
+package cn.originmc.plugins.origincore.util.action.impl;
 
 import cn.originmc.plugins.origincore.OriginCore;
 import cn.originmc.plugins.origincore.hook.PlaceholderAPIHook;
-import cn.originmc.plugins.origincore.util.action.AbstractAction;
+import cn.originmc.plugins.origincore.util.action.object.abs.AbstractAction;
 import cn.originmc.plugins.origincore.util.text.FormatText;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.List;
 import java.util.Map;
@@ -13,17 +12,17 @@ import java.util.Map;
 public class MessageAction extends AbstractAction {
 
 
-    public MessageAction(JavaPlugin plugin, FormatText actionSetting, List<Boolean> beforeExecuteResult, Map<String, Object> objectMap) {
-        super(plugin, actionSetting, beforeExecuteResult, objectMap);
+    public MessageAction(FormatText actionSetting, Map<String, Object> objectMap) {
+        super(actionSetting, objectMap);
     }
 
-    public MessageAction(JavaPlugin plugin, FormatText actionSetting, List<Boolean> beforeExecuteResult) {
-        super(plugin, actionSetting, beforeExecuteResult);
+    public MessageAction(FormatText actionSetting) {
+        super(actionSetting);
     }
 
     @Override
-    public boolean execute() {
-        if (!canExecute()){
+    public boolean execute(List<Boolean> beforeExecuteResult) {
+        if (!canExecute(beforeExecuteResult)){
             return false;
         }
         String messageMode=getActionSetting().getValue("mode");
