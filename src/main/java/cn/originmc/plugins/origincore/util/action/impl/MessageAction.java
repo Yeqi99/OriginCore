@@ -27,27 +27,6 @@ public class MessageAction extends AbstractAction {
         }
         String messageMode=getActionSetting().getValue("mode");
         String message=getActionSetting().getValue("message");
-        if (messageMode.equalsIgnoreCase("self")){
-            Player self=getSelf();
-            if (PlaceholderAPIHook.isLoad()){
-                message=PlaceholderAPIHook.getPlaceholder(self,message);
-            }
-            if (self==null){
-                return false;
-            }
-            OriginCore.getSender().sendToPlayer(self,message);
-        }else if (messageMode.equalsIgnoreCase("all")){
-            OriginCore.getSender().sendPAPIToOnline(message);
-        }else if (messageMode.equalsIgnoreCase("target")){
-            Player target= getTarget();
-            if (PlaceholderAPIHook.isLoad()){
-                message=PlaceholderAPIHook.getPlaceholder(target,message);
-            }
-            if (target==null){
-                return false;
-            }
-            OriginCore.getSender().sendToPlayer(target,message);
-        }
         return true;
     }
 }

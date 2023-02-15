@@ -1,6 +1,9 @@
 package cn.originmc.plugins.origincore.util.action.object.abs;
 
 import cn.originmc.plugins.origincore.util.text.FormatText;
+import io.lumine.mythic.lib.parser.client.eval.api.IFieldElement0Function;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -42,18 +45,34 @@ public abstract class AbstractAction {
     public Object getObject(String key){
         return getObjectMap().get(key);
     }
-    public Player getSelf(){
-        return (Player) getObjectMap().get("self");
+    public String getTarget(){
+        return getActionSetting().getValue("target");
     }
-    public Player getTarget(){
-        return (Player) getObjectMap().get("target");
+    public Object getTargetObject(){
+        if (getTarget().contains("!")){
+            return Bukkit.getPlayer(getTarget().replace("!",""));
+        }
+        switch (getTarget()){
+            case "self":{
+                return getObjectMap().get("self");
+            }
+            case "all":{
+                return Bukkit.getOnlinePlayers();
+            }
+            case "attacker":{
+                return getObjectMap().get("attacker");
+            }
+            case "attacked":{
+                return getObjectMap().get("attacked");
+            }
+        }
+        return null;
     }
+
     public String getType(){
         return getActionSetting().getValue("type");
     }
-    public void putObject(String key,Object object){
-        getObjectMap().put(key,object);
-    }
+
     public boolean hasObject(String key){
         return getObjectMap().containsKey(key);
     }

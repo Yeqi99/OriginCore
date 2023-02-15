@@ -1,10 +1,13 @@
 package cn.originmc.plugins.origincore.util.command;
 
+import cn.originmc.plugins.origincore.OriginCore;
 import cn.originmc.plugins.origincore.hook.LuckPermsHook;
 import cn.originmc.plugins.origincore.hook.luckperms.LuckPermsManager;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -106,5 +109,20 @@ public class CommandUtil {
     public CommandSender getSender(){
         return sender;
     }
-
+    public static void playConsoleCommand(String command){
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                Bukkit.getScheduler().runTask(OriginCore.getInstance(), () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command));
+            }
+        }.runTaskAsynchronously(OriginCore.getInstance());
+    }
+    public static void playPlayerCommand(Player player,String command){
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                Bukkit.getScheduler().runTask(OriginCore.getInstance(),() ->  player.performCommand(command));
+            }
+        }.runTaskAsynchronously(OriginCore.getInstance());
+    }
 }

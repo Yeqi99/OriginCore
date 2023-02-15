@@ -13,6 +13,7 @@ softdepend:
   - ItemsAdder
   - MythicLib
   - MythicMobs
+  - Multiverse-Core
 commands:
   OriginCore:
     aliases:

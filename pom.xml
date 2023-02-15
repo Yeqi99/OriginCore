@@ -93,6 +93,11 @@
             <name>Lumine Releases</name>
             <url>https://mvn.lumine.io/repository/maven-public/</url>
         </repository>
+        <!-- Mv -->
+        <repository>
+            <id>OnARandomBox</id>
+            <url>https://repo.onarandombox.com/content/groups/public/</url>
+        </repository>
 
     </repositories>
 
@@ -184,6 +189,13 @@
             <groupId>io.lumine</groupId>
             <artifactId>Mythic-Dist</artifactId>
             <version>5.2.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Mv -->
+        <dependency>
+            <groupId>com.onarandombox.multiversecore</groupId> <!-- Don't forget to replace this -->
+            <artifactId>Multiverse-Core</artifactId> <!-- Replace this as well -->
+            <version>4.3.1</version> <!-- This too -->
             <scope>provided</scope>
         </dependency>
     </dependencies>

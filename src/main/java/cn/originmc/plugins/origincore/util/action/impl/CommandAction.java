@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -29,29 +30,56 @@ public class CommandAction extends AbstractAction {
         }
         String commandMode=getActionSetting().getValue("mode");
         String command=getActionSetting().getValue("command");
-        Player player=getSelf();
-        if (player==null){
+        Object object=getTarget();
+        if (object==null){
             return false;
         }
-        if (PlaceholderAPIHook.isLoad()){
-            command=PlaceholderAPIHook.getPlaceholder(player,command);
-        }
-        if (commandMode.equalsIgnoreCase("player")){
-            String finalCommand = command;
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    Bukkit.getScheduler().runTask(OriginCore.getInstance(),() -> player.performCommand(finalCommand));
+        if (getTarget().equalsIgnoreCase("all")){
+            Collection<Player> onlinePlayers= (Collection) object;
+            for (Player onlinePlayer : onlinePlayers) {
+                if (PlaceholderAPIHook.isLoad()){
+                    command=PlaceholderAPIHook.getPlaceholder( onlinePlayer,command);
                 }
-            }.runTaskAsynchronously(OriginCore.getInstance());
-        }else if (commandMode.equalsIgnoreCase("console")){
-            String finalCommand = command;
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    Bukkit.getScheduler().runTask(OriginCore.getInstance(), () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), finalCommand));
+                if (commandMode.equalsIgnoreCase("player")){
+                    String finalCommand = command;
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            Bukkit.getScheduler().runTask(OriginCore.getInstance(),() ->  onlinePlayer.performCommand(finalCommand));
+                        }
+                    }.runTaskAsynchronously(OriginCore.getInstance());
+                }else if (commandMode.equalsIgnoreCase("console")){
+                    String finalCommand = command;
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            Bukkit.getScheduler().runTask(OriginCore.getInstance(), () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), finalCommand));
+                        }
+                    }.runTaskAsynchronously(OriginCore.getInstance());
                 }
-            }.runTaskAsynchronously(OriginCore.getInstance());
+            }
+        }else {
+            Player player= (Player) object;
+            if (PlaceholderAPIHook.isLoad()){
+                command=PlaceholderAPIHook.getPlaceholder( player,command);
+            }
+            if (commandMode.equalsIgnoreCase("player")){
+                String finalCommand = command;
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        Bukkit.getScheduler().runTask(OriginCore.getInstance(),() ->  player.performCommand(finalCommand));
+                    }
+                }.runTaskAsynchronously(OriginCore.getInstance());
+            }else if (commandMode.equalsIgnoreCase("console")){
+                String finalCommand = command;
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        Bukkit.getScheduler().runTask(OriginCore.getInstance(), () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), finalCommand));
+                    }
+                }.runTaskAsynchronously(OriginCore.getInstance());
+            }
         }
         return true;
     }
