@@ -1,13 +1,8 @@
 package cn.originmc.plugins.origincore.util.item;
 
-import cn.originmc.plugins.origincore.OriginCore;
 import cn.originmc.plugins.origincore.util.text.FormatText;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Multimap;
 import de.tr7zw.nbtapi.*;
 import de.tr7zw.nbtapi.iface.ReadWriteNBT;
-import io.lumine.mythic.lib.parser.client.eval.api.IFieldElement0Function;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;

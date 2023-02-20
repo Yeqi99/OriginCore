@@ -1,16 +1,10 @@
 package cn.originmc.plugins.origincore;
 
 import cn.originmc.plugins.origincore.hook.PlaceholderAPIHook;
-import cn.originmc.plugins.origincore.hook.mmoitems.MMOItemsManager;
 import cn.originmc.plugins.origincore.util.bungeecord.BungeeCordUtil;
 import cn.originmc.plugins.origincore.util.command.CommandUtil;
 import cn.originmc.plugins.origincore.util.item.Item;
-import de.tr7zw.nbtapi.NBTCompound;
-import de.tr7zw.nbtapi.NBTItem;
-import de.tr7zw.nbtapi.NBTList;
-import de.tr7zw.nbtapi.NBTListCompound;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.command.Command;
@@ -18,7 +12,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
-import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -28,20 +21,20 @@ public class OriginCoreCommand implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         CommandUtil c=new CommandUtil(sender,command,label,args);
         if (!c.isAdmin()){
-            c.getSender().sendMessage("&c权限不足!");
+            OriginCore.getSender().sendToSender(sender,"&c权限不足!");
             return true;
         }
         if (c.getParameterAmount()==0){
-            c.getSender().sendMessage("&c参数不足!");
+            OriginCore.getSender().sendToSender(sender,"&c参数不足!");
             return true;
         }
         if (c.is(0,"reload")){
             OriginCore.getInstance().reloadConfig();
-            c.getSender().sendMessage("&a重载成功!");
+            OriginCore.getSender().sendToSender(sender,"&a重载成功!");
         }else if (c.is(0,"tpServer")){
             if (c.getParameterAmount()==2){
                 if (!c.isPlayer()){
-                    c.getSender().sendMessage("&c只允许玩家执行!");
+                    OriginCore.getSender().sendToSender(sender,"&c只允许玩家执行!");
                     return true;
                 }
                 String serverName=c.getParameter(1);
@@ -52,7 +45,7 @@ public class OriginCoreCommand implements CommandExecutor {
                 return true;
             }else if (c.getParameterAmount()>=3){
                 if (!c.isPlayer()){
-                    c.getSender().sendMessage("&c只允许玩家执行!");
+                    OriginCore.getSender().sendToSender(sender,"&c只允许玩家执行!");
                     return true;
                 }
                 String playerName=c.getParameter(1);
@@ -73,7 +66,7 @@ public class OriginCoreCommand implements CommandExecutor {
                 String papi=c.getParameter(1);
                 Player player=Bukkit.getPlayer(c.getParameter(2));
                 if (player==null){
-                    c.getSender().sendMessage("&c玩家不存在!");
+                    OriginCore.getSender().sendToSender(sender,"&c玩家不存在!");
                     return true;
                 }
                 c.getSender().sendMessage(PlaceholderAPIHook.getPlaceholder(player,papi));

@@ -28,22 +28,19 @@ public class Particle {
         packet.getFloat().write(3,maxSpeed);
     }
     public boolean sendToPlayer(Player player){
-        if(ProtocolLibHook.isLoad()){
-            if(player!=null){
-                if(packet!=null){
-                    try {
-                        ProtocolLibHook.getPm().sendServerPacket(player,packet);
-                        return true;
-                    } catch (InvocationTargetException e) {
-                        return false;
-                    }
-                }else {
-                    return false;
-                }
-            }else {
-                return false;
-            }
-        }else {
+        if(!ProtocolLibHook.isLoad()){
+            return false;
+        }
+        if(player==null){
+            return false;
+        }
+        if(packet==null){
+            return false;
+        }
+        try {
+            ProtocolLibHook.getPm().sendServerPacket(player,packet);
+            return true;
+        } catch (InvocationTargetException e) {
             return false;
         }
     }
