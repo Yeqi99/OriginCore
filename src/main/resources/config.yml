@@ -1,3 +1,5 @@
 hook-message: true
 cool-down-listener:
   enable: true
+gui-listener:
+  enable: true

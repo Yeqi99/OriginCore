@@ -198,5 +198,11 @@
             <version>4.3.1</version> <!-- This too -->
             <scope>provided</scope>
         </dependency>
+        <!-- Mysql -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.30</version>
+        </dependency>
     </dependencies>
 </project>
