@@ -1,9 +1,8 @@
 package cn.originmc.plugins.origincore.util.data.database.mysql;
 
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import javax.swing.table.TableRowSorter;
+import java.sql.*;
 
 public class MysqlManager {
     public static boolean hook(){
@@ -23,5 +22,17 @@ public class MysqlManager {
             e.printStackTrace();
         }
         return null;
+    }
+    public static boolean hasData(String name,Connection connection){
+        boolean flag=false;
+        try {
+            DatabaseMetaData meta=connection.getMetaData();
+            String[] type ={"TABLE"};
+            ResultSet rs=meta.getTables(null,null,name,type);
+            flag=rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return flag;
     }
 }
