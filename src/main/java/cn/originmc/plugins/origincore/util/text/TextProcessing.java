@@ -58,4 +58,36 @@ public class TextProcessing {
         }
         return textList;
     }
+    public static String getSectionStart(String str){
+        String start="";
+        boolean flag=false;
+        for (char c:str.toCharArray()){
+            if (!flag){
+                if (c=='-'){
+                    flag=true;
+                }else {
+                    start+=c;
+                }
+            }else {
+                break;
+            }
+        }
+        return start;
+    }
+    public static String getSectionEnd(String str){
+        String end="";
+        boolean flag=false;
+        for (char c:str.toCharArray()){
+            if (!flag){
+                if (c=='-'){
+                    flag=true;
+                    continue;
+                }
+            }
+            if (flag){
+                end+=c;
+            }
+        }
+        return end;
+    }
 }

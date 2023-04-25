@@ -53,7 +53,9 @@ public class FormatText {
                 key.append(c);
             }
         }
-        keyMap.put(key.toString(), value.toString());
+        if (key.toString().length()>0){
+            keyMap.put(key.toString(), value.toString());
+        }
     }
 
     /**

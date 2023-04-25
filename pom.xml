@@ -168,6 +168,14 @@
             <version>1.5</version>
             <systemPath>${project.basedir}/libs/MythicLib-1.5.jar</systemPath>
         </dependency>
+        <!-- AbolethCore -->
+        <dependency>
+            <groupId>core</groupId>
+            <artifactId>abolethCore</artifactId>
+            <scope>system</scope>
+            <version>1.0.0</version>
+            <systemPath>${project.basedir}/libs/AbolethCore-1.0.0.jar</systemPath>
+        </dependency>
         <!-- MMOItems -->
         <dependency>
             <groupId>libs</groupId>
