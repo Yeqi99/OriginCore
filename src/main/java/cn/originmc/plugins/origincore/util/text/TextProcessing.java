@@ -90,4 +90,14 @@ public class TextProcessing {
         }
         return end;
     }
+    public static boolean inSection(String str,double num){
+        double start= Double.parseDouble(getSectionStart(str));
+        double end= Double.parseDouble(getSectionEnd(str));
+        if (start>end){
+            double temp=start;
+            start=end;
+            end=temp;
+        }
+        return num >= start & num <= end;
+    }
 }

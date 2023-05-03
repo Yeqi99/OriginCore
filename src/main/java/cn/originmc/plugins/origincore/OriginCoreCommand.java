@@ -1,19 +1,27 @@
 package cn.originmc.plugins.origincore;
 
 import cn.originmc.plugins.origincore.hook.PlaceholderAPIHook;
+import cn.originmc.plugins.origincore.hook.mythicmobs.MythicMobsManager;
 import cn.originmc.plugins.origincore.util.bungeecord.BungeeCordUtil;
 import cn.originmc.plugins.origincore.util.command.CommandUtil;
 import cn.originmc.plugins.origincore.util.item.Item;
+import cn.originmc.plugins.origincore.util.location.OCLocation;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 
 public class OriginCoreCommand implements CommandExecutor {
@@ -92,6 +100,13 @@ public class OriginCoreCommand implements CommandExecutor {
             double value= Double.parseDouble(c.getParameter(5));
             item.setAttribute(id,attribute,value,operation,slot);
             c.getPlayer().getInventory().setItemInMainHand(item.getItemStack());
+        }else if (c.is(0,"skill")){
+            Player player=c.getPlayer();
+            String skillName=c.getParameter(1);
+            LivingEntity livingEntity=MythicMobsManager.getTarget(player);
+            List<Entity> targets = new ArrayList();
+            targets.add(livingEntity);
+            MythicMobsManager.castSkill(player,skillName,player,player.getLocation(),targets,null,1.0F,null);
         }
         return true;
     }

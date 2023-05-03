@@ -13,8 +13,10 @@ import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.core.mobs.ActiveMob;
 import io.lumine.mythic.core.skills.SkillMetadataImpl;
 import io.lumine.mythic.core.skills.SkillTriggers;
+import io.lumine.mythic.core.utils.MythicUtil;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import java.util.Collection;
@@ -67,6 +69,9 @@ public class MythicMobsManager {
             return false;
         }
     }
+    public static LivingEntity getTarget(Player player){
+        return MythicUtil.getTargetedEntity(player);
+    }
     public static boolean castSkill(Entity e, String skillName, Entity trigger, Location origin, Collection<Entity> eTargets, Collection<Location> lTargets, float power, Consumer<SkillMetadata> transformer){
         Optional<Skill> maybeSkill = MythicBukkit.inst().getSkillManager().getSkill(skillName);
         if (!maybeSkill.isPresent()) {
@@ -98,7 +103,6 @@ public class MythicMobsManager {
                     flTargets.add(BukkitAdapter.adapt(l));
                 }
             }
-
             SkillMetadata data = new SkillMetadataImpl(SkillTriggers.API, (SkillCaster)caster, BukkitAdapter.adapt(trigger), BukkitAdapter.adapt(origin), feTargets, flTargets, power);
             if (transformer != null) {
                 transformer.accept(data);
@@ -107,7 +111,6 @@ public class MythicMobsManager {
             if (skill.isUsable(data, SkillTriggers.API)) {
                 skill.execute(data);
             }
-
             return true;
         }
     }
