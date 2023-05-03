@@ -5,9 +5,7 @@ import cn.originmc.plugins.origincore.hook.mythicmobs.MythicMobsManager;
 import cn.originmc.plugins.origincore.util.bungeecord.BungeeCordUtil;
 import cn.originmc.plugins.origincore.util.command.CommandUtil;
 import cn.originmc.plugins.origincore.util.item.Item;
-import cn.originmc.plugins.origincore.util.location.OCLocation;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.command.Command;
@@ -20,7 +18,6 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 
@@ -106,8 +103,10 @@ public class OriginCoreCommand implements CommandExecutor {
             LivingEntity livingEntity=MythicMobsManager.getTarget(player);
             List<Entity> targets = new ArrayList();
             targets.add(livingEntity);
-            MythicMobsManager.castSkill(player,skillName,player,player.getLocation(),targets,null,1.0F,null);
+            float power= Float.parseFloat(c.getParameter(2));
+            MythicMobsManager.castSkill(player,skillName,player,player.getLocation(),targets,null,power,null);
         }
         return true;
     }
+
 }

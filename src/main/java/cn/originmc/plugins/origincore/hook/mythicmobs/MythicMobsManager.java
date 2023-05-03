@@ -19,9 +19,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class MythicMobsManager {
@@ -113,5 +111,11 @@ public class MythicMobsManager {
             }
             return true;
         }
+    }
+    public static boolean castSkill(Player player,String skill,Float power){
+        LivingEntity livingEntity=MythicMobsManager.getTarget(player);
+        List<Entity> targets = new ArrayList();
+        targets.add(livingEntity);
+        return MythicMobsManager.castSkill(player,skill,player,player.getLocation(),targets,null,power,null);
     }
 }
