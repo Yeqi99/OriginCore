@@ -2,6 +2,7 @@ package cn.originmc.plugins.origincore;
 
 import cn.originmc.plugins.origincore.hook.PlaceholderAPIHook;
 import cn.originmc.plugins.origincore.hook.mythicmobs.MythicMobsManager;
+import cn.originmc.plugins.origincore.util.action.object.Actions;
 import cn.originmc.plugins.origincore.util.bungeecord.BungeeCordUtil;
 import cn.originmc.plugins.origincore.util.command.CommandUtil;
 import cn.originmc.plugins.origincore.util.item.Item;
@@ -105,6 +106,19 @@ public class OriginCoreCommand implements CommandExecutor {
             targets.add(livingEntity);
             float power= Float.parseFloat(c.getParameter(2));
             MythicMobsManager.castSkill(player,skillName,player,player.getLocation(),targets,null,power,null);
+        }else if (c.is(0,"test")){
+            List<String> actionString=new ArrayList<>();
+            actionString.add("type^MMSkill`skill^长剑普攻`power^10");
+            actionString.add("type^Delay`time^500");
+            actionString.add("type^MMSkill`skill^长剑普攻`power^10");
+            actionString.add("type^Delay`time^500");
+            actionString.add("type^MMSkill`skill^长剑普攻`power^10");
+            actionString.add("type^Delay`time^500");
+            actionString.add("type^MMSkill`skill^长剑普攻`power^10");
+
+            Actions actions=new Actions(actionString);
+            actions.putObject("self",c.getPlayer());
+            actions.execute();
         }
         return true;
     }

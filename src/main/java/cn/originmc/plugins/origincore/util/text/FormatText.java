@@ -1,5 +1,7 @@
 package cn.originmc.plugins.origincore.util.text;
 
+import cn.originmc.plugins.origincore.OriginCore;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

@@ -108,7 +108,7 @@ public class Randomizer {
         boolean flag=false;
         for (char c:str.toCharArray()){
             if (!flag){
-                if (c=='-'){
+                if (c=='~'){
                     flag=true;
                     continue;
                 }else {

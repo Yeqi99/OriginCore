@@ -72,11 +72,14 @@ public abstract class AbstractAction {
     public String getType(){
         return getActionSetting().getValue("type");
     }
+    public String getMode(){
+        return getActionSetting().getValue("mode");
+    }
 
     public boolean hasObject(String key){
         return getObjectMap().containsKey(key);
     }
-    public abstract boolean execute(List<Boolean> beforeExecuteResult);
+    public abstract boolean execute(List<Boolean> beforeExecuteResult,FormatText parameter);
 
 
     public FormatText getActionSetting() {

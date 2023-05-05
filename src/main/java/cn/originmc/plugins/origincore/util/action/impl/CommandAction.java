@@ -24,13 +24,22 @@ public class CommandAction extends AbstractAction {
     }
 
     @Override
-    public boolean execute(List<Boolean> beforeExecuteResult) {
+    public boolean execute(List<Boolean> beforeExecuteResult,FormatText parameter) {
         if (!canExecute(beforeExecuteResult)){
             return false;
         }
-        String commandMode=getActionSetting().getValue("mode");
         String command=getActionSetting().getValue("command");
-        Object object=getTarget();
+        if (parameter!=null){
+            if (command.contains("!")){
+                if (parameter.hasKey(command.replace("!",""))){
+                    command=parameter.getValue(command.replace("!",""));
+                }
+            }
+        }
+        if (PlaceholderAPIHook.isLoad()){
+            command=PlaceholderAPIHook.getPlaceholder((Player) getObject("self"),command);
+        }
+        Object object=getTargetObject();
         if (object==null){
             return false;
         }
@@ -40,7 +49,7 @@ public class CommandAction extends AbstractAction {
                 if (PlaceholderAPIHook.isLoad()){
                     command=PlaceholderAPIHook.getPlaceholder( onlinePlayer,command);
                 }
-                if (commandMode.equalsIgnoreCase("player")){
+                if (getMode().equalsIgnoreCase("player")){
                     String finalCommand = command;
                     new BukkitRunnable() {
                         @Override
@@ -48,7 +57,7 @@ public class CommandAction extends AbstractAction {
                             Bukkit.getScheduler().runTask(OriginCore.getInstance(),() ->  onlinePlayer.performCommand(finalCommand));
                         }
                     }.runTaskAsynchronously(OriginCore.getInstance());
-                }else if (commandMode.equalsIgnoreCase("console")){
+                }else if (getMode().equalsIgnoreCase("console")){
                     String finalCommand = command;
                     new BukkitRunnable() {
                         @Override
@@ -63,7 +72,7 @@ public class CommandAction extends AbstractAction {
             if (PlaceholderAPIHook.isLoad()){
                 command=PlaceholderAPIHook.getPlaceholder( player,command);
             }
-            if (commandMode.equalsIgnoreCase("player")){
+            if (getMode().equalsIgnoreCase("player")){
                 String finalCommand = command;
                 new BukkitRunnable() {
                     @Override
@@ -71,7 +80,7 @@ public class CommandAction extends AbstractAction {
                         Bukkit.getScheduler().runTask(OriginCore.getInstance(),() ->  player.performCommand(finalCommand));
                     }
                 }.runTaskAsynchronously(OriginCore.getInstance());
-            }else if (commandMode.equalsIgnoreCase("console")){
+            }else if (getMode().equalsIgnoreCase("console")){
                 String finalCommand = command;
                 new BukkitRunnable() {
                     @Override
