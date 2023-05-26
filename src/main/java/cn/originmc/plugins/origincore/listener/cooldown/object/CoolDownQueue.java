@@ -111,7 +111,12 @@ public class CoolDownQueue {
         }
     }
     public long getTime(UUID id,String sId){
-        return getCoolDown(id,sId).getTime();
+        CoolDown coolDown=getCoolDown(id,sId);
+        if (coolDown==null){
+            return 0;
+        }else {
+            return coolDown.getTime();
+        }
     }
     public long getTime(UUID id){
         return getCoolDown(id).getTime();

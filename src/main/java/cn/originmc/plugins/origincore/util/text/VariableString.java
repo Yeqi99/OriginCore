@@ -52,7 +52,13 @@ public class VariableString {
             return "";
         }
     }
-    public void setVariable(String old,String value){
+
+    /**
+     * 将指定变量替换为对应值
+     * @param var 变量名
+     * @param value 对应值
+     */
+    public void setVariable(String var,String value){
         StringBuilder clone=new StringBuilder();
         for (int i=0;i<getResultString().length();i++){
             char nowChar = getResultString().charAt(i);
@@ -74,10 +80,10 @@ public class VariableString {
                     nextSignIndex++;
                     funNameChar = getResultString().charAt(nextSignIndex);
                 }
-                if (funName.toString().equalsIgnoreCase(old)){
+                if (funName.toString().equalsIgnoreCase(var)){
                     clone.append(value);
                 }else {
-                    clone.append("*").append(funName).append("*");
+                    clone.append(getSign()).append(funName).append(getSign());
                 }
                 i = nextSignIndex;
             }
@@ -116,7 +122,7 @@ public class VariableString {
                 if (nowIndex==index){
                     clone.append(value);
                 }else {
-                    clone.append("*").append(funName).append("*");
+                    clone.append(getSign()).append(funName).append(getSign());
                     nowIndex++;
                 }
                 i = nextSignIndex;

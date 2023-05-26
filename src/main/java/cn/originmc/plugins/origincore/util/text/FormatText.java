@@ -1,6 +1,5 @@
 package cn.originmc.plugins.origincore.util.text;
 
-import cn.originmc.plugins.origincore.OriginCore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +21,7 @@ public class FormatText {
 
     /**
      * 根据格式化文本获取信息
+     * 将字符串转换为Map类型数据
      */
     public void getData(){
         keyMap.clear();

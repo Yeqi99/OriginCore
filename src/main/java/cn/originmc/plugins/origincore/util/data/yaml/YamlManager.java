@@ -1,6 +1,8 @@
 package cn.originmc.plugins.origincore.util.data.yaml;
 
 
+import cn.originmc.plugins.origincore.OriginCore;
+import cn.originmc.plugins.origincore.util.text.Sender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 

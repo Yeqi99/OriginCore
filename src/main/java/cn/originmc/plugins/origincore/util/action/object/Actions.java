@@ -8,6 +8,7 @@ import cn.originmc.plugins.origincore.util.action.impl.MMSkillAction;
 import cn.originmc.plugins.origincore.util.action.impl.MessageAction;
 import cn.originmc.plugins.origincore.util.action.object.abs.AbstractAction;
 import cn.originmc.plugins.origincore.util.text.FormatText;
+import cn.originmc.plugins.origincore.util.text.Sender;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
