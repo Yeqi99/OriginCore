@@ -37,12 +37,8 @@ public class Particle {
         if(packet==null){
             return false;
         }
-        try {
-            ProtocolLibHook.getPm().sendServerPacket(player,packet);
-            return true;
-        } catch (InvocationTargetException e) {
-            return false;
-        }
+        ProtocolLibHook.getPm().sendServerPacket(player,packet);
+        return true;
     }
     public PacketContainer getPacket() {
         return packet;
