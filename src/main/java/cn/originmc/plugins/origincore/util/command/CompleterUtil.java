@@ -4,6 +4,7 @@ import cn.originmc.plugins.origincore.hook.LuckPermsHook;
 import cn.originmc.plugins.origincore.hook.luckperms.LuckPermsManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
