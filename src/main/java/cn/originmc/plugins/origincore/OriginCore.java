@@ -5,6 +5,7 @@ import cn.originmc.plugins.origincore.listener.gui.listener.GuiListener;
 import cn.originmc.plugins.origincore.util.register.CommandRegister;
 import cn.originmc.plugins.origincore.util.register.ListenerRegister;
 import cn.originmc.plugins.origincore.util.text.Sender;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class OriginCore extends JavaPlugin {

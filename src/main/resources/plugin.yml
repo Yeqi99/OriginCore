@@ -18,3 +18,4 @@ commands:
   OriginCore:
     aliases:
       - oc
+folia-supported: true 
